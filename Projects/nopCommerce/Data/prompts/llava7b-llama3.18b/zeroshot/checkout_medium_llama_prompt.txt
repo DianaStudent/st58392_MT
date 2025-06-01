@@ -1,0 +1,55 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and a textual description of UI screenshots for the 'checkout-medium' process.
+
+html_data: {html_data}
+
+screenshots_description: {screen_description}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure and visual layout.
+URL: http://max/
+Credentials:
+FirstName: Test
+LastName: User
+Email: random_email
+City: Riga
+Address1: Street 1
+ZipPostalCode: LV-1234
+PhoneNumber: 12345678
+CountryId: 124
+StateProvinceId: 0
+ShippingOption: #shippingoption_1
+PaymentMethodOption: #paymentmethod_1
+CreditCardType: visa
+CardholderName: Test User
+CardNumber: 4111111111111111
+ExpireMonth: 4
+ExpireYear: 2027
+CardCode: 123
+Test scenario:
+1. Open the home page.
+2. Click on the "Search" link and search for a product (e.g. "book").
+3. Click the "Add to cart" button for the first item in the search results.
+4. Open the shopping cart via the success notification popup.
+5. Accept terms of service and click the "Checkout" button.
+6. Choose "Checkout as Guest".
+7. Fill in the billing address.
+8. Select shipping and payment methods.
+9. Enter credit card details.
+10. Confirm the order.
+11. Validate that the confirmation message or success section is visible.
+Rules:
+- Search for a product (e.g. “book”), add it to cart.
+- Click “shopping cart” from the success popup.
+- Use the "Checkout as Guest" option.
+- Use credentials provided.
+- Confirm success by checking for an order completion message.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.
+
+Return only Python code using unittest.

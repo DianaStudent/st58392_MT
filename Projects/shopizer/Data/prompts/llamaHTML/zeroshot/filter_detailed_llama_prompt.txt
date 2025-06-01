@@ -1,0 +1,32 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and  for the 'filter' process.
+
+html_data: {html_data}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure .
+Test scenario:
+1. Open the home page.
+2. Apply the "Tables" filter by clicking the corresponding tab.
+3. Wait for product grid to update.
+4. Store number of visible products (1 product).
+5. Switch to the "Chairs" filter and wait for grid to refresh (3 products).
+6. Verify that the list of products is updated and different from the previous.
+7. Then click the "All" filter to reset (4 products).
+8. Confirm that product list contains more items than after previous filters.
+Rules:
+- Click on the filter tab.
+- After filter is applied, check that at least one product is displayed.
+- Ensure that product count or identifiers differ between filters.
+- Success is when the product count changes after applying filters.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.
+
+Return only Python code using unittest.

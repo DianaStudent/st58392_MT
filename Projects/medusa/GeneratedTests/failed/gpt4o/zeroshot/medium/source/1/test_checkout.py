@@ -1,0 +1,131 @@
+from selenium.webdriver.support.expected_conditions import presence_of_element_located, element_to_be_clickable, text_to_be_present_in_element
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+class TestCheckoutProcess(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.driver.get("http://localhost:8000/dk")
+        self.wait = WebDriverWait(self.driver, 20)
+
+    def test_checkout_process(self):
+        driver = self.driver
+
+        # Open home page and click on the menu button
+        menu_button = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='nav-menu-button']"))
+        )
+        menu_button.click()
+
+        # Click on the "Store" link
+        store_link = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "a[data-testid='store-link']"))
+        )
+        store_link.click()
+
+        # Click on a product image (thumbnail)
+        product_image = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "a[href='/dk/products/sweatshirt'] img"))
+        )
+        product_image.click()
+
+        # Select a size
+        size_button = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='option-button']"))
+        )
+        size_button.click()
+
+        # Click the "Add to Cart" button
+        add_to_cart_button = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='add-product-button']"))
+        )
+        add_to_cart_button.click()
+
+        # Click the cart button to open the cart
+        cart_button = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "a[data-testid='nav-cart-link']"))
+        )
+        cart_button.click()
+
+        # Click "Go to checkout"
+        go_to_checkout_button = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='go-to-checkout-button']"))
+        )
+        go_to_checkout_button.click()
+
+        # Fill checkout fields
+        self.fill_checkout_fields()
+
+        # Select delivery and payment methods
+        self.select_delivery_and_payment_methods()
+
+        # Click "Place Order"
+        place_order_button = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='submit-order-button']"))
+        )
+        place_order_button.click()
+
+        # Verify the confirmation page
+        confirmation_message = self.wait.until(
+            EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'Your order was placed successfully')]"))
+        )
+
+        if not confirmation_message:
+            self.fail("Confirmation message not found or empty")
+        
+        self.assertTrue(confirmation_message.is_displayed())
+
+    def fill_checkout_fields(self):
+        driver = self.driver
+        fields = {
+            "shipping-first-name-input": "user",
+            "shipping-last-name-input": "test",
+            "shipping-address-input": "street 1",
+            "shipping-postal-code-input": "LV-1021",
+            "shipping-city-input": "Riga",
+            "shipping-country-select": "dk",
+            "shipping-email-input": "user@test.com"
+        }
+
+        for field, value in fields.items():
+            element = self.wait.until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, f"input[data-testid='{field}']"))
+            )
+            element.clear()
+            element.send_keys(value)
+
+        # Select country
+        country_select = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "select[data-testid='shipping-country-select']"))
+        )
+        country_select.send_keys("Denmark")
+
+    def select_delivery_and_payment_methods(self):
+        # Select delivery and payment methods
+        delivery_option = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "span[data-testid='delivery-option-radio'] button"))
+        )
+        delivery_option.click()
+
+        payment_option = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "span[id='headlessui-radio-:rk:'] button"))
+        )
+        payment_option.click()
+
+        # Continue to review
+        submit_payment_button = self.wait.until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='submit-payment-button']"))
+        )
+        submit_payment_button.click()
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()

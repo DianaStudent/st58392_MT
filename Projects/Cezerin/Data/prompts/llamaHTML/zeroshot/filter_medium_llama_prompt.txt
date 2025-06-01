@@ -1,0 +1,31 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and  for the 'filter' process.
+
+html_data: {html_data}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure .
+Test scenario:
+1. Open the category page.
+2. Locate and apply the "Brand A" checkbox filter.
+3. Wait 2 seconds to allow the UI to update.
+4. Verify that the number of displayed product cards changes (e.g., 2 → 1).
+5. Uncheck the "Brand A" filter.
+6. Verify that the original number of product cards is restored (e.g., 1 → 2).
+7. Locate the price slider component.
+8. Move one of the slider handles to apply a price range filter.
+9. Verify that the product count changes again.
+Rules:
+- Apply the "Brand A" checkbox filter by clicking on the checkbox input. Wait 2 seconds, then uncheck the "Brand A" filter.
+- Use the interactive price slider component to change price filtering.
+- Success condition: The number of visible product cards must change after applying and removing the filter (e.g., 2 → 1 → 2).
+- Use webdriver-manager to manage ChromeDriver.
+- Do not hardcode visible text like "Category A" or "Product A" — use exact text or href values from html_data.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.
+
+Return only Python code using unittest.

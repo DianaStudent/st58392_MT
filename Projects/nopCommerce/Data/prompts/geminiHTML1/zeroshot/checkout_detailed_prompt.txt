@@ -1,0 +1,56 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the user checkout process.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for the user checkout process based on the provided html_data and UI screenshots.
+URL: http://max/
+Credentials:
+FirstName: Test
+LastName: User
+Email: random_email
+City: Riga
+Address1: Street 1
+ZipPostalCode: LV-1234
+PhoneNumber: 12345678
+CountryId: 124
+StateProvinceId: 0
+ShippingOption: #shippingoption_1
+PaymentMethodOption: #paymentmethod_1
+CreditCardType: visa
+CardholderName: Test User
+CardNumber: 4111111111111111
+ExpireMonth: 4
+ExpireYear: 2027
+CardCode: 123
+Test scenario:
+1. Open the homepage.
+2. Navigate to the "Search" page and look for a product using the query "book".
+3. Add the first result to the cart using a product tile button.
+4. From the success notification, click the "shopping cart" link.
+5. Check the "Terms of service" checkbox and click the "Checkout" button.
+6. Choose "Checkout as Guest".
+7. Fill out the full billing form (from credentials):
+   - First name, last name, email (generated), address, city, country, zip code, phone.
+   - Use select tags for country and state/province if available.
+8. Proceed through the following:
+   - Shipping method step.
+   - Payment method step.
+   - Payment info step (fill in credit card details from credentials if necessary).
+9. On the confirm step, click “Confirm” and wait for the success message.
+10. Confirm that the order has been completed by checking:
+   - The confirmation text "Thank you" appears.
+   
+Rules:
+- Search for a product (e.g. “book”), add it to cart.
+- Click “shopping cart” from the success popup.
+- Use the "Checkout as Guest" option.
+- Use credentials provided.
+- Confirm success by checking for an order completion message "Thank you".
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.

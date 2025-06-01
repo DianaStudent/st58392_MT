@@ -1,0 +1,38 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structures and UI screenshots for the checkout process. html_data: {html_data} Use this URL http://localhost/
+Test requirements:
+Generate a Python Selenium test that performs the full checkout process from start to finish. Navigate through each step in sequence as a real user would. Use only selectors found in html_data. All interactions must correspond to elements explicitly present in html_data.
+Before interacting with any element, verify that it exists in the DOM, is visible, interactable, and not hidden or overlapped. Use WebDriverWait with a timeout of 20 seconds for all element interactions. Scroll each element into view before clicking or typing. If an interaction fails due to ElementNotInteractableException or similar, retry up to three times with short delays.
+After each action, assert that the expected UI change occurred. This includes filling out billing forms, confirming selected shipping and payment methods, and verifying that the order details match after confirmation. Use screenshots to validate UI appearance.
+Before placing the order, ensure that all required fields are filled and validated. Check that the selected shipping and payment methods are correct. Retry confirming these selections if they initially appear incorrect or unselected. After placing the order, verify that a success message appears and that the order summary displays the correct total amount and customer information.
+Your task:
+Generate a Python Selenium test that:
+opens http://localhost/
+searches for "book"
+adds the first product to the cart
+opens the shopping cart from the success notification
+proceeds to checkout
+selects "Checkout as Guest"
+generates a random email for the guest user
+fills the billing form with:
+FirstName = "Test"
+LastName = "User"
+City = "Riga"
+Address1 = "Street 1"
+ZipPostalCode = "LV-1234"
+PhoneNumber = "12345678"
+Country = Latvia
+State = Other
+selects shipping method = "Next Day Air"
+selects payment method = "Credit Card"
+enters payment details:
+Credit Card Type = visa
+CardholderName = "Test User"
+CardNumber = "4111111111111111"
+ExpireMonth = "4"
+ExpireYear = "2027"
+CardCode = "123"
+confirms the order
+verifies the success message appears on the order completed page
+
+structure the test as a proper unittest with setUp() and tearDown()
+Return only the Python code for the test.

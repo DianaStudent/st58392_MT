@@ -1,0 +1,15 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and textual description of UI screenshots (variable: {screenshots_data}) for the add-to-cart process.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for the add to cart process based on the provided html_data and textual description of UI screenshots (variable: {screenshots_data}).
+URL: http://max/
+Rules:
+- Search for a book using the search box and submit the search.
+- The success notification must be visible and contain a link to the cart.
+- Confirm success by checking that the cart contains at least one item.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.

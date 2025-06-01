@@ -1,0 +1,37 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and a textual description of UI screenshots for the 'register-detailed' process.
+
+html_data: {html_data}
+
+screenshots_description: {screen_description}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure and visual layout.
+URL: http://localhost:8000/dk
+Credentials:
+First name: user
+Last name: test
+Email: dynamically generated
+Password: testuser
+Test scenario:
+1. Open the homepage.
+2. Click the "Account" button in the right left corner.
+3. Click the "Join Us" button below the login form.
+4. Fill in all fields: first name, last name, and password from credentials, generate unique email.
+5. Submit the registration form.
+6. Verify registration success by checking presence of welcome message "Hello user".
+Rules:
+- Fill all fields for registration from credentials.
+- Confirm success by checking that the welcome message "Hello user" is present.
+- When locating elements, always prefer using data-testid attributes if they exist in html_data
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.
+
+Return only Python code using unittest.

@@ -1,0 +1,34 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and a textual description of UI screenshots for the 'register-medium' process.
+
+html_data: {html_data}
+
+screenshots_description: {screen_description}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure and visual layout.
+URL: http://max/
+Credentials: 
+- Gender: Female
+- First name: Test
+- Last name: User
+- Email: dynamically generated
+- Company: TestCorp
+- Password: test11
+1. Open the homepage.
+2. Click the "Register".
+3. Wait for the registration page to load.
+4. Fill all the fields.
+5. Submit the registration form.
+6. Verify that a message like "Your registration completed" is shown after successful registration.
+Rules:
+- Confirm success by checking the message like "Your registration completed" is shown after successful registration.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.
+
+Return only Python code using unittest.

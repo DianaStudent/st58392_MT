@@ -1,0 +1,12 @@
+	Gender: Female (radio buttom)
+	First name: Test
+	Last name: User
+	Email: test@user.com
+	Company name: TestCorp
+	pasword: test11
+	Confirm  pasword: test11
+
+
+         http://max/
+    user: admin@admin.com
+    pasword: admin

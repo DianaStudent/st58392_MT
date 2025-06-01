@@ -1,0 +1,140 @@
+from selenium.webdriver.support.expected_conditions import presence_of_element_located, element_to_be_clickable, text_to_be_present_in_element
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+class MedusaStoreTest(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.driver.get("http://localhost:8000/dk")
+
+    def test_checkout_process(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 20)
+
+        # Navigate to store
+        try:
+            store_link = driver.find_element(By.XPATH, "//a[@data-testid='nav-store-link']")
+            store_link.click()
+        except Exception:
+            self.fail("Store link not found")
+
+        # Select product
+        try:
+            product_link = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "//a[@href='/dk/products/sweatshirt']")
+            ))
+            product_link.click()
+        except Exception:
+            self.fail("Product link not found")
+
+        # Select size and add to cart
+        try:
+            size_button = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "//button[text()='L']")
+            ))
+            size_button.click()
+
+            add_to_cart_button = driver.find_element(By.XPATH, "//button[@data-testid='add-product-button']")
+            add_to_cart_button.click()
+        except Exception:
+            self.fail("Failed to add product to cart")
+
+        # Go to cart
+        try:
+            cart_link = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "//a[@data-testid='nav-cart-link']")
+            ))
+            cart_link.click()
+        except Exception:
+            self.fail("Cart link not found")
+
+        # Proceed to checkout
+        try:
+            checkout_button = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "//button[@data-testid='go-to-cart-button']")
+            ))
+            checkout_button.click()
+        except Exception:
+            self.fail("Checkout button not found")
+
+        # Fill in shipping details
+        try:
+            email_input = driver.find_element(By.XPATH, "//input[@data-testid='shipping-email-input']")
+            email_input.send_keys("user@test.com")
+
+            first_name_input = driver.find_element(By.XPATH, "//input[@data-testid='shipping-first-name-input']")
+            first_name_input.send_keys("user")
+
+            last_name_input = driver.find_element(By.XPATH, "//input[@data-testid='shipping-last-name-input']")
+            last_name_input.send_keys("test")
+
+            address_input = driver.find_element(By.XPATH, "//input[@data-testid='shipping-address-input']")
+            address_input.send_keys("street 1")
+
+            postal_code_input = driver.find_element(By.XPATH, "//input[@data-testid='shipping-postal-code-input']")
+            postal_code_input.send_keys("LV-1021")
+
+            city_input = driver.find_element(By.XPATH, "//input[@data-testid='shipping-city-input']")
+            city_input.send_keys("Riga")
+
+            country_select = driver.find_element(By.XPATH, "//select[@data-testid='shipping-country-select']")
+            country_select.send_keys("Denmark")
+
+            continue_to_delivery_button = driver.find_element(By.XPATH, "//button[@data-testid='submit-address-button']")
+            continue_to_delivery_button.click()
+        except Exception:
+            self.fail("Failed to fill shipping details")
+
+        # Select delivery option
+        try:
+            delivery_option = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "//span[contains(text(), 'Express Shipping')]")
+            ))
+            delivery_option.click()
+
+            continue_to_payment_button = driver.find_element(By.XPATH, "//button[@data-testid='submit-delivery-option-button']")
+            continue_to_payment_button.click()
+        except Exception:
+            self.fail("Failed to select delivery option")
+
+        # Select payment method
+        try:
+            payment_option = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "//p[text()='Manual Payment']")
+            ))
+            payment_option.click()
+
+            continue_to_review_button = driver.find_element(By.XPATH, "//button[@data-testid='submit-payment-button']")
+            continue_to_review_button.click()
+        except Exception:
+            self.fail("Failed to select payment method")
+
+        # Place order
+        try:
+            place_order_button = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "//button[@data-testid='submit-order-button']")
+            ))
+            place_order_button.click()
+        except Exception:
+            self.fail("Failed to place order")
+
+        # Verify order success
+        try:
+            success_message = wait.until(EC.presence_of_element_located(
+                (By.XPATH, "//span[text()='Your order was placed successfully.']")
+            ))
+            self.assertTrue("Your order was placed successfully." in success_message.text)
+        except Exception:
+            self.fail("Order success message not found")
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()

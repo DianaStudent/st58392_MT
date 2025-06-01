@@ -1,0 +1,46 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the user checkout process.
+Below is a dataset containing:
+- HTML structure
+- UI screenshots
+- Previously generated Python test code
+- Error traceback from the last test run
+Task:
+Fix or regenerate the Python Selenium unittest test for the checkout process using the provided information.
+html_data: {html_data}
+previous_code: {previous_code}
+error_traceback: {error_message}
+URL: http://localhost/
+Credentials: "Email": test22@user.com, "Password": "test**11"
+Test scenario:
+1. Open the home page.
+2. Log in using credentials.
+3. Navigate back to the home page.
+3. Hover over the first product.
+4. Click the revealed "Add to cart" button.
+5. Click the cart icon to open the popup cart.
+6. Wait for the popup to become visible.
+7. Click "View cart" or similar button inside the popup.
+8. On the cart page, click the "Proceed to Checkout" button.
+7. Fill out the billing form:
+   - Company ("Comp1")
+   - Address ("Street1")
+   - City ("Quebec")
+   - Select region/state from dropdown (use label-based matching)
+   - Postal code ("1234")
+   - Phone number ("1234567891")
+   - Accept terms checkbox
+8. Wait for any maps popups or warnings and close them.
+9. Confirm success if form is filled.
+Rules:
+- The test should perform login, add products to the cart, go to cart page, click "Proceed to Checkout", and fill in the billing form.
+- Confirm success by verifying that the billing form is fiiled.
+- Do not rely on dynamic ID values — use label or section attributes like data-name instead.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.

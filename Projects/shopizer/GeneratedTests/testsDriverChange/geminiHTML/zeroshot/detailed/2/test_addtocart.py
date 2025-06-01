@@ -1,0 +1,61 @@
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+
+class AddToCartTest(unittest.TestCase):
+
+    def setUp(self):
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service)
+        self.driver.get("http://localhost/")
+        self.driver.maximize_window()
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_add_to_cart(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 20)
+
+        # Accept cookies if present
+        try:
+            cookie_button = wait.until(EC.presence_of_element_located((By.ID, "rcc-confirm-button")))
+            cookie_button.click()
+        except:
+            pass
+
+        # Hover over the first product
+        first_product = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='col-xl-3 col-md-6 col-lg-4 col-sm-6'][1]//div[@class='product-wrap-2 mb-25']")))
+        actions = ActionChains(driver)
+        actions.move_to_element(first_product).perform()
+
+        # Click the "Add to cart" button
+        add_to_cart_button = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='col-xl-3 col-md-6 col-lg-4 col-sm-6'][1]//button[@title='Add to cart']")))
+        add_to_cart_button.click()
+
+        # Click the cart icon to open the popup cart
+        cart_icon = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "icon-cart")))
+        cart_icon.click()
+
+        # Wait for the popup to become visible
+        cart_popup = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "shopping-cart-content.active")))
+
+        # Click "View Cart" button inside the popup
+        view_cart_button = wait.until(EC.presence_of_element_located((By.LINK_TEXT, "View Cart")))
+        view_cart_button.click()
+
+        # Verify that the product appears in the cart list on the cart page
+        product_name_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "product-name")))
+        product_name = product_name_element.text
+        if not product_name:
+            self.fail("Product name not found in cart.")
+
+        self.assertIn("Olive Table", product_name)
+
+if __name__ == "__main__":
+    unittest.main()

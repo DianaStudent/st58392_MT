@@ -1,0 +1,66 @@
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+class LoginTest(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+        self.driver.get("http://max/")
+        self.driver.maximize_window()
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_login(self):
+        driver = self.driver
+        # Go to my account page
+        try:
+            my_account_link = WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable((By.LINK_TEXT, "My account"))
+            )
+            my_account_link.click()
+        except:
+            self.fail("Could not find 'My account' link.")
+
+        # Find the email field and enter the email
+        try:
+            email_field = WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.ID, "Email"))
+            )
+            email_field.clear()
+            email_field.send_keys("admin@admin.com")
+        except:
+            self.fail("Could not find email field.")
+
+        # Find the password field and enter the password
+        try:
+            password_field = WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.ID, "Password"))
+            )
+            password_field.clear()
+            password_field.send_keys("admin")
+        except:
+            self.fail("Could not find password field.")
+
+        # Find the login button and click it
+        try:
+            login_button = WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable((By.CLASS_NAME, "login-button"))
+            )
+            login_button.click()
+        except:
+            self.fail("Could not find login button.")
+
+        # Check for successful login by verifying the presence of "Log out" link.
+        try:
+            WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.LINK_TEXT, "Log out"))
+            )
+        except:
+            self.fail("Login failed. 'Log out' link not found.")
+
+if __name__ == "__main__":
+    unittest.main()

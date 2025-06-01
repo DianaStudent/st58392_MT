@@ -1,0 +1,33 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and  for the 'filter' process.
+
+html_data: {html_data}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure .
+Test scenario:
+1. Open the category page.
+2. Wait until products and filters are fully loaded.
+3. Locate and apply the "Brand A" checkbox filter using its associated input.
+4. Confirm it is checked.
+5. Wait 2 seconds and verify that the number of product cards is reduced (e.g., 2 → 1).
+6. Uncheck the filter and confirm product count is restored (e.g., 1 → 2).
+7. Locate the price slider component and move the right slider handle to reduce the maximum price to 1159 .
+9. Wait 2 seconds and verify that the number of product cards is reduced (e.g., 2 → 1).
+Rules:
+- Apply the "Brand A" checkbox filter by clicking on the checkbox input. Wait 2 seconds, then uncheck the "Brand A" filter.
+- Use the interactive price slider component to change price filtering.
+- Success condition: The number of visible product cards must change after applying and removing the filter (e.g., 2 → 1 → 2).
+- Use webdriver-manager to manage ChromeDriver.
+- Do not hardcode visible text like "Category A" or "Product A" — use exact text or href values from html_data.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Use aria-valuenow, aria-valuemin, and aria-valuemax attributes to confirm slider values.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.
+
+Return only Python code using unittest.

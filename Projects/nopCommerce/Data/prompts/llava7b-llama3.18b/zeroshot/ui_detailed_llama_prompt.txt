@@ -1,0 +1,30 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and a textual description of UI screenshots for the 'ui-detailed' process.
+
+html_data: {html_data}
+
+screenshots_description: {screen_description}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure and visual layout.
+home: http://max/
+login_page: http://max/login?returnUrl=%2F
+register_page: http://max/register?returnUrl=%2F
+search_page: http://max/search
+Test scenario:
+1. Load the page and ensure that structural elements (e.g., header, footer, navigation) are visible.
+2. Check the presence and visibility of input fields, buttons, labels, and sections.
+3. Interact with key UI elements (e.g., click buttons).
+4. Confirm that the UI reacts visually.
+5. Assert that no required UI element is missing.
+Rules:
+- Check that the main UI components are present: headers, buttons, links, form fields, etc.
+- Check that these elements exist and are visible.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.
+
+Return only Python code using unittest.

@@ -1,0 +1,19 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and  for the 'addtocart' process.
+
+html_data: {html_data}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure .
+Rules:
+- Wait for the modal (popup) confirmation to appear after adding to cart.
+- Confirm success by verifying the presence of the modal title that contains "successfully added" or similar.
+- Do not rely on dynamic ID values — use label or section attributes like data-name instead.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.
+
+Return only Python code using unittest.

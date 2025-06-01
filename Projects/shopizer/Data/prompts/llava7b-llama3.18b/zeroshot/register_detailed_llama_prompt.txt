@@ -1,0 +1,41 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and a textual description of UI screenshots for the 'register-detailed' process.
+
+html_data: {html_data}
+
+screenshots_description: {screen_description}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure and visual layout.
+URL: http://localhost/
+Credentials to use:
+- Email: dynamically generated, like test_xxxxxx@user.com
+- Password: test**11
+- firstname: Test
+- lastname: User
+Test scenario:
+1. Open the home page.
+2. Click on the account icon/button.
+3. Select the "Register" option.
+4. Wait for the registration page to load.
+5. Fill in all fields: email, password, repeat password, first name, last name.
+6. Select a first country from the dropdown and wait for region/state dropdown to load.
+7. Select a first state only after selecting country and click on some place, to avoid country selector hide state selector.
+8. Submit the form.
+9. Wait for the page to redirect and confirm registration success by:
+   - Checking if the URL contains "/my-account"
+Rules:
+- Fill all fields for registration.
+- Confirm success by checking that the browser is redirected to a page containing "/my-account" in the URL.
+- Do not rely on dynamic ID values — use label or section attributes like data-name instead.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.
+
+Return only Python code using unittest.

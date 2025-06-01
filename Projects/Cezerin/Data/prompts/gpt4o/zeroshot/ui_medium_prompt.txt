@@ -1,0 +1,21 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots of website.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for verifying that the key UI elements of the page are present and visible, based on the provided html_data and UI screenshots.
+home URL: http://localhost:3000
+category_a URL: http://localhost:3000/category-a
+category_a_1 URL: http://localhost:3000/category-a-1
+Test scenario:
+1. Open the page.
+2. Confirm the presence of key interface elements: navigation links, inputs, buttons, banners.
+3. Interact with one or two elements — e.g., click a button and check that the UI updates visually.
+4. Verify that interactive elements do not cause errors in the UI.
+Rules:
+- Check that the main UI components are present: headers, buttons, links, form fields, etc.
+- Check that these elements exist and are visible.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.

@@ -1,0 +1,15 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the user checkout process.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for the user checkout process based on the provided html_data and UI screenshots.
+URL: http://localhost/
+Credentials: "Email": test22@user.com, "Password": "test**11"
+Rules:
+- The test should perform login, add products to the cart, go to cart page, click "Proceed to Checkout", and fill in the billing form.
+- Confirm success by verifying that the billing form is fiiled.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.

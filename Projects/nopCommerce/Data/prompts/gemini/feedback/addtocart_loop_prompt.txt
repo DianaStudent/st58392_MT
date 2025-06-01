@@ -1,0 +1,36 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the add-to-cart process.
+Below is a dataset containing:
+- HTML structure
+- UI screenshots
+- Previously generated Python test code
+- Error traceback from the last test run
+Task:
+Fix or regenerate the Python Selenium unittest test for the add to cart process using the provided information.
+html_data: {html_data}
+previous_code: {previous_code}
+error_traceback: {error_message}
+URL: http://max/
+Search term: book
+Test scenario:
+1. Navigate to the homepage.
+2. Click on "Search" from the main menu.
+3. Type the search term "book" into the search field.
+4. Submit the search.
+5. Wait for the product grid to load.
+6. Locate the first product result and click the "Add to cart" button.
+7. Wait for the notification bar to appear "The product has been added to your shopping cart".
+8. From the notification, click the "shopping cart" link.
+9. On the cart page, verify that the expected product is present.
+Rules:
+
+- The success notification must be visible and contain a link to the cart.
+- Confirm success by checking that the cart contains at least one item.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.

@@ -1,0 +1,25 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the login process.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for the login process based on the provided html_data and UI screenshots.
+URL: http://localhost:8080/en/
+Credentials: "Email": "test@user.com", "Password": "test@user1"
+Test scenario:
+Test scenario:
+1. Open the home page.
+2. Click on the login link in the top menu.
+3. Wait for the login page to load.
+4. Fill in the email and password fields.
+5. Submit the login form.
+6. Verify that login was successful by checking for the presence of "Sign out" in the top bar.
+
+Rules:
+- Confirm success by checking that the text "Sign out" appear.
+- Do not rely on dynamic ID values — use label or section attributes like data-name instead.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.

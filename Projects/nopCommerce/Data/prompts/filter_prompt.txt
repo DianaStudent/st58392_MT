@@ -1,0 +1,37 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structures and UI screenshots for the **product filtering** process.
+
+html_data: {html_data}
+
+Base URL: "http://localhost/"
+
+Your task is to generate a valid, importable Python test using `unittest` and `selenium` that tests product filtering functionality based ONLY on elements and selectors from the provided html_data.
+
+Test constraints and structure:
+
+1. The test must simulate a user searching for products (e.g., typing a keyword), then applying a filter such as price range, category, checkbox, or tag — only if such filters exist in html_data.
+2. The test must locate and interact with filter UI elements (sliders, checkboxes, input fields, etc.) using selectors explicitly found in html_data. If none exist, skip interaction with that filter type.
+3. Use `WebDriverWait` to ensure elements are interactable before interacting.
+4. Log meaningful steps like:
+   - "Searching for 'book'"
+   - "Applying price filter 10–20"
+   - "Verifying product list updated"
+5. After applying a filter, assert that filtered products match expected criteria (e.g., price within range).
+6. If product list is dynamic, wait for it to update before verifying.
+7. Use at least two screenshots (before/after filtering) if screenshots_data is provided, to visually confirm UI change.
+8. Log actual vs expected results clearly if assertions fail (e.g., "Expected 3 products, found 5").
+9. If a filter doesn't respond, retry interaction up to 3 times with short delays before failing.
+
+Test structure:
+
+- Use `unittest.TestCase`
+- Include `setUp()` to open browser and navigate to "http://max/"
+- Include `tearDown()` to close browser
+- No top-level execution code unless guarded by `if __name__ == "__main__":`
+- All logic must be within class methods
+
+Avoid:
+- Using invented or assumed selectors not present in html_data
+- Using hardcoded waits (`time.sleep`)
+- Using direct test method calls
+
+Return only the valid and complete Python test code.

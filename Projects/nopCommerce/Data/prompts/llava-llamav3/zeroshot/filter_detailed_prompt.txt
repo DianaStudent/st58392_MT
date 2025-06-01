@@ -1,0 +1,31 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and textual description of UI screenshots (variable: {screenshots_data}) for the product filter process.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for the product filter process based on the provided html_data and textual description of UI screenshots (variable: {screenshots_data}).
+URL: http://max/
+Test scenario:
+1. Open the home page.
+2. Click on the "Search" link.
+3. Enter "book" in the search field and submit the search.
+4. Wait for the search results to load.
+5. Locate and interact with the price range slider:
+   - Adjust the minimum or maximum slider handle to set a specific range (e.g. 0–25).
+   - Wait for the filtering to apply dynamically.
+6. Confirm that:
+   - The product grid updates after slider movement.
+   - At least one product is shown in the filtered results.
+
+Rules:
+- Perform a product search using the query "book".
+- Apply a price filter by navigating to a URL that includes the price parameter.
+- You must use slider interaction (drag handles) to apply the price filter.
+- Confirm success by checking that the resulting product grid is updated.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.

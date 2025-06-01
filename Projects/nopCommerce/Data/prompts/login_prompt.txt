@@ -1,0 +1,25 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structures and UI screenshots for the **login** process.
+
+html_data: {html_data}
+
+Use this URL "http://localhost/"
+
+Test requirements:
+
+Generate a Python Selenium test that performs the complete login flow for an existing user.
+The test must navigate to the login page, enter valid credentials, and submit the form.
+Use only selectors available in html_data to locate username/email and password fields and the submit button.
+Before interaction, verify that each element exists and is interactable.
+Use WebDriverWait for dynamic login elements or delayed rendering.
+Assert that after login, the UI reflects a logged-in state (e.g., user profile visible, redirect to dashboard).
+Use screenshots to verify expected page layout after login.
+If login fails, capture and log the error message and verify it matches expected text.
+Retry locating the login button or fields up to three times if they are missing.
+Log all key steps ("Entering email", "Submitting login form", "Verifying login success").
+Include setUp() and tearDown() to manage the browser session properly.
+Return only Python code for the test.
+Credentials to use:
+First name: Test
+Last name: User
+Email: test@user.com
+Password: test11

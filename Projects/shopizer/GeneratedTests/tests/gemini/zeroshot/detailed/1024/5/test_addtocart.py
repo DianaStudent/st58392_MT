@@ -1,0 +1,67 @@
+import unittest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
+class AddToCartTest(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.driver.get("http://localhost/")
+        self.driver.maximize_window()
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_add_to_cart(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 20)
+
+        # Accept cookies
+        try:
+            cookie_button = wait.until(EC.presence_of_element_located((By.ID, "rcc-confirm-button")))
+            cookie_button.click()
+        except:
+            pass
+
+        # Hover over the first product
+        product_element = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='col-xl-3 col-md-6 col-lg-4 col-sm-6'][1]")))
+        actions = ActionChains(driver)
+        actions.move_to_element(product_element).perform()
+
+        # Click the "Add to cart" button
+        add_to_cart_button = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='col-xl-3 col-md-6 col-lg-4 col-sm-6'][1]//button[@title='Add to cart']")))
+        add_to_cart_button.click()
+
+        # Click the cart icon to open the popup cart
+        cart_icon = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "icon-cart")))
+        cart_icon.click()
+
+        # Wait for the popup to become visible
+        cart_popup = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "shopping-cart-content.active")))
+
+        # Check if the cart popup contains at least one item
+        cart_items = cart_popup.find_elements(By.CLASS_NAME, "single-shopping-cart")
+        if not cart_items:
+            self.fail("Cart is empty after adding product.")
+
+        # Click "View Cart" button inside the popup
+        view_cart_button = wait.until(EC.presence_of_element_located((By.LINK_TEXT, "View Cart")))
+        view_cart_button.click()
+
+        # On the cart page, verify that the product appears in the cart list
+        cart_page_product_name = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "cart-page-title")))
+        if not cart_page_product_name:
+            self.fail("Cart page did not load correctly.")
+
+        cart_item_name = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='product-name']/a")))
+
+        if not cart_item_name.text:
+            self.fail("Product name is empty.")
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,36 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the login process.
+Below is a dataset containing:
+- HTML structure
+- UI screenshots
+- Previously generated Python test code
+- Error traceback from the last test run
+Task:
+Fix or regenerate the Python Selenium unittest test for the login process using the provided information.
+html_data: {html_data}
+previous_code: {previous_code}
+error_traceback: {error_message}
+URL: http://localhost/
+Credentials: Email: test2@user.com, Password: test**11
+Test scenario:
+1. Open the home page.
+2. Click on the account icon/button in the top-right.
+3. Wait for the dropdown and click the "Login" link.
+4. Wait for the login form to appear.
+5. Fill in the username and password fields using credentials.
+6. Click the login button.
+7. Wait for redirection or page update.
+8. Confirm successful login by:
+   - Verifying that the current URL contains "/my-account".   
+Rules:
+- The test should click the account icon, then click the "Login" link to open the login form.
+- Fill in the email and password fields using credentials.
+- Confirm success by checking that the browser is redirected to a page containing "/my-account" in the URL.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.

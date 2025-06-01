@@ -1,0 +1,78 @@
+import unittest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver import ActionChains
+import time
+
+class ProductFilterTest(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        self.driver.maximize_window()
+        self.driver.get('http://localhost:3000/category-a')
+
+    def test_product_filter(self):
+        driver = self.driver
+
+        # Verify initial number of products
+        product_cards = WebDriverWait(driver, 20).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".columns.is-multiline.is-mobile.products .column.available"))
+        )
+        initial_count = len(product_cards)
+        if initial_count == 0:
+            self.fail("No products found initially")
+
+        # Apply "Brand A" filter
+        brand_a_checkbox = WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, "//label[input[@type='checkbox']][contains(., 'Brand A')]"))
+        )
+        brand_a_checkbox.click()
+
+        # Wait for UI to update
+        time.sleep(2)
+
+        # Verify product count changes
+        filtered_products = driver.find_elements(By.CSS_SELECTOR, ".columns.is-multiline.is-mobile.products .column.available")
+        filtered_count = len(filtered_products)
+        self.assertNotEqual(initial_count, filtered_count, "Product count did not change after applying Brand A filter.")
+
+        # Uncheck "Brand A" filter
+        brand_a_checkbox.click()
+
+        # Wait for UI to update
+        time.sleep(2)
+
+        # Verify original product count restored
+        restored_products = driver.find_elements(By.CSS_SELECTOR, ".columns.is-multiline.is-mobile.products .column.available")
+        restored_count = len(restored_products)
+        self.assertEqual(initial_count, restored_count, "Product count did not restore after removing Brand A filter.")
+
+        # Locate and interact with price slider
+        price_slider = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, ".price-filter .price-filter-values"))
+        )
+        slider_handle = WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".price-filter input[type='range']"))
+        )
+
+        # Move the slider handle
+        action = ActionChains(driver)
+        action.click_and_hold(slider_handle).move_by_offset(-20, 0).release().perform()
+
+        # Wait for UI to update
+        time.sleep(2)
+
+        # Verify product count changes again
+        price_filtered_products = driver.find_elements(By.CSS_SELECTOR, ".columns.is-multiline.is-mobile.products .column.available")
+        final_count = len(price_filtered_products)
+        self.assertNotEqual(restored_count, final_count, "Product count did not change after adjusting the price filter.")
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()

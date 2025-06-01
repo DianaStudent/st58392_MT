@@ -1,0 +1,43 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structures and UI screenshots for the **user registration** process.
+
+html_data: {html_data}
+Use this URL "http://localhost/"
+
+Test requirements:
+
+Generate a Python Selenium test that accurately follows all steps of the user registration process.
+The test must simulate a real user creating a new account.
+Use only element selectors from html_data for all interactions.
+Before interacting with any element (e.g., input fields, checkboxes, submit button), the test must confirm its presence and interactability.
+Use WebDriverWait where necessary for dynamically loaded elements.
+Fill in all required fields: first name, last name, email, password, confirm password, and optional fields if present.
+If there is a CAPTCHA, describe the placeholder logic to bypass or mock it.
+Assert that after form submission, a success message or redirection to a logged-in state occurs.
+Log actual vs expected results for success messages or redirects (e.g., "Expected URL '/account', Found: '/'").
+If any element is missing or validation fails, retry finding the element up to three times with delays before failing.
+Screenshots from screenshots_data should be used to verify the expected layout or transitions visually.
+Log key actions (e.g., "Filling name fields", "Submitting registration form", "Checking success confirmation").
+Include setUp() and tearDown() methods for browser management.
+Log key actions (e.g., "Filling name fields", "Submitting registration form", "Checking success confirmation").
+Include setUp() and tearDown() methods for browser management.
+
+To avoid duplicate user registration errors, generate a random integer (e.g., between 1000 and 9999) and append it to dynamic fields like "FirstName", "LastName", and especially "Email".
+For example, use "Test1234", "User1234", and "test1234@user.com".
+This ensures every test run uses unique credentials.
+
+Return only Python code for the test.
+
+Credentials must be like:
+    "Gender": "M",
+    "FirstName": "Test5",
+    "LastName": "User5",
+    "Email": unique_email,
+    "Company": "TestCorp5",
+    "Password": "test11",
+    "ConfirmPassword": "test11"
+After submitting the form, confirm registration success by checking for any of the following:
+- Success message (e.g., "Your registration completed")
+- Presence of "Log out", "My account", or similar user elements
+- Confirmation popup or banner
+
+Do not rely on a specific URL. Use WebDriverWait to detect any of these. If none appear, log the URL and page state.

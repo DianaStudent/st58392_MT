@@ -1,0 +1,48 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the checkout process.
+Below is a dataset containing:
+- HTML structure
+- UI screenshots
+- Previously generated Python test code
+- Error traceback from the last test run
+Task:
+Fix or regenerate the Python Selenium unittest test for the checkout process using the provided information - fix errors based on error traceback.
+html_data: {html_data}
+previous_code: {previous_code}
+error_traceback: {error_message}
+Task:
+Generate a simple Python Selenium test for the checkout process based on the provided html_data and UI screenshots.
+URL: http://localhost:3000/
+Test scenario:
+1. Open home page.
+2. Click on product category.
+3. Select the first product.
+4. Click the "Add to cart" button.
+5. Click the cart icon/button to open the shopping bag. 
+6. Verify that the "GO TO CHECKOUT" button is present inside the cart.
+7. Click the "GO TO CHECKOUT" button.
+8. Wait for the checkout form to appear.
+9. Fill out the checkout form fields using the following credentials:
+   - Email: mail@mail.com
+   - Phone: 12345678
+   - State: Riga
+   - City: Riga
+10. Select a shipping method and a payment method.
+11. Click the "Next" button.
+12. Click the "Place Order" button.
+13. Wait for the confirmation page and check that it includes the text "Thanks for your order!".
+
+Rules:
+- The test must explicitly click the shopping cart icon (usually a bag image with class "cart-button") to open the mini-cart. Do not assume it opens automatically.
+- After adding a product to the cart, the test must click on the cart button (shopping bag) - Wait for presence of "GO TO CHECKOUT" button using html_data. Its presence is success.
+- Fill required checkout fields (e.g. email, phone, shipping address, Shipping, payment).
+- After placing the order, the test must confirm that the final success page contains the text: "Thanks for your order!".
+- Fill required checkout fields (e.g. email, phone, shipping address, Shipping, payment).
+- After placing the order, the test must confirm that the final success page contains the text: "Thanks for your order!".
+- Use webdriver-manager to manage ChromeDriver.
+- Do not hardcode visible text like "Category A" or "Product A" — use exact text or href values from html_data.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.

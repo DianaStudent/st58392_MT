@@ -1,0 +1,27 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the user registration process.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for the user registration process based on the provided html_data and UI screenshots.
+URL: http://localhost/
+Credentials to use:
+- Email: dynamically generated
+- Password: test**11
+- First Name: Test
+- Last Name: User
+Test scenario:
+1. Open the home page.
+2. Click on the account button and select "Register".
+3. Fill in the registration form.
+4. Select a country and a region/state.
+5. Submit the registration form.
+6. Wait for redirect and confirm success by checking if the current URL includes "/my-account".
+Rules:
+- Fill all fields for registration.
+- Confirm success by checking that the browser is redirected to a page containing "/my-account" in the URL.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.

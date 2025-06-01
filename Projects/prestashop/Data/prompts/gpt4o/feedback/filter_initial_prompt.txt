@@ -1,0 +1,32 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the product filter process.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for the product filter process based on the provided html_data and UI screenshots.
+URL: http://localhost:8080/en/
+Test scenario:
+1. Open the home page.
+2. Click on the "Art" category in the top menu.
+3. Wait for the category page to load.
+4. Locate the filter section and apply the checkbox "Matt paper" under "Composition".
+5. Do not use dynamic IDs. Use XPath or CSS selectors based on `data-name` and label text.
+6. Wait for the filter to apply.
+7. Assert that the number of product tiles is reduced from 7 to 3.
+8. Locate and click the "Clear all" button to remove filters.
+9. Wait and assert that the number of products returns to the original count - 7.
+Rules:
+- Wait for the filter sidebar.
+- Select a checkbox filter.
+- Do not rely on dynamic ID values — use label or section attributes like data-name instead.
+- After applying the filter, verify that the number of visible product items changes.
+- Use attribute-based selectors, not dynamic IDs — rely on label text and section data-name values.
+- Wait for filters to take effect by monitoring the number of elements.
+- Success is when the product count changes after applying and removing filters.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+- Use presence_of_element_located to locate elements. Use visibility checks only when needed.
+- Avoid hardcoded XPath text. Always derive selectors and conditions from html_data.
+Return only Python code using unittest.

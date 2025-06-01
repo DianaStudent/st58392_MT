@@ -1,0 +1,30 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and a textual description of UI screenshots for the 'addtocart-medium' process.
+
+html_data: {html_data}
+
+screenshots_description: {screen_description}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure and visual layout.
+URL: http://localhost/
+Test scenario:
+1. Open the home page.
+2. Hover over a product image to reveal the "Add to cart" button.
+3. Click the "Add to cart" button.
+4. Open the cart popup by clicking the cart icon.
+5. Verify that at least one product is listed in the popup cart.
+
+Rules:
+- Hover over a product item to reveal the "Add to cart" button.
+- Open the cart popup by clicking the cart icon.
+- Confirm success by checking that the popup contains at least one item.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.
+
+Return only Python code using unittest.

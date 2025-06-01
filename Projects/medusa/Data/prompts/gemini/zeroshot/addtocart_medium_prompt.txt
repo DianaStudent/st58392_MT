@@ -1,0 +1,25 @@
+You are an expert in Selenium automation. Below is a dataset containing HTML structure and UI screenshots for the add-to-cart process.
+html_data: {html_data}
+Task:
+Generate a simple Python Selenium test for the add to cart process based on the provided html_data.
+URL: http://localhost:8000/dk
+Test scenario:
+1. Open home page.
+2. Click on the menu button.
+3. Click on the "Store" link.
+4. Click on a product image (thumbnail).
+5. Select a size.
+6. Click the "Add to Cart" button.
+7. Click the cart button to open the cart.
+8. Verify that the "GO TO CHECKOUT" button is present.
+
+Rules:
+- The test must explicitly click the shopping cart button cart. Do not assume it opens automatically.
+- After adding a product to the cart, the test must click on the cart button (shopping bag) - Wait for presence of "GO TO CHECKOUT" button using html_data. Its presence is success.
+- Use webdriver-manager to manage ChromeDriver.
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.

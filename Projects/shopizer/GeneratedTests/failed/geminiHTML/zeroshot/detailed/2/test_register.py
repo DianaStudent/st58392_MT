@@ -1,0 +1,105 @@
+from selenium.webdriver.support.expected_conditions import presence_of_element_located, element_to_be_clickable, text_to_be_present_in_element
+import unittest
+import random
+import string
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import Select
+
+class RegistrationTest(unittest.TestCase):
+
+    def setUp(self):
+        service = Service(executable_path=ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service)
+        self.driver.get("http://localhost/")
+        self.driver.maximize_window()
+        self.wait = WebDriverWait(self.driver, 20)
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_user_registration(self):
+        # 1. Open the home page. (Done in setUp)
+
+        # 2. Click on the account icon/button.
+        try:
+            account_button = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "account-setting-active")))
+            account_button.click()
+        except Exception as e:
+            self.fail(f"Account button not found or not clickable: {e}")
+
+        # 3. Select the "Register" option.
+        try:
+            register_link = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/register']")))
+            register_link.click()
+        except Exception as e:
+            self.fail(f"Register link not found or not clickable: {e}")
+
+        # 4. Wait for the registration page to load.
+        try:
+            self.wait.until(EC.presence_of_element_located((By.XPATH, "//h4[contains(text(), 'Register')]")))
+        except Exception as e:
+            self.fail(f"Registration page not loaded: {e}")
+
+        # 5. Fill in all fields: email, password, repeat password, first name, last name.
+        email = "test_" + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6)) + "@user.com"
+        password = "test**11"
+        firstname = "Test"
+        lastname = "User"
+
+        try:
+            email_field = self.wait.until(EC.element_to_be_clickable((By.NAME, "email")))
+            password_field = self.driver.find_element(By.NAME, "password")
+            repeat_password_field = self.driver.find_element(By.NAME, "repeatPassword")
+            firstname_field = self.driver.find_element(By.NAME, "firstName")
+            lastname_field = self.driver.find_element(By.NAME, "lastName")
+
+            email_field.send_keys(email)
+            password_field.send_keys(password)
+            repeat_password_field.send_keys(password)
+            firstname_field.send_keys(firstname)
+            lastname_field.send_keys(lastname)
+
+        except Exception as e:
+            self.fail(f"Could not find or fill registration form fields: {e}")
+
+        # 6. Select a first country from the dropdown and wait for region/state dropdown to load.
+        try:
+            country_select = Select(self.driver.find_element(By.XPATH, "//select/option[text()='Select a country']/../.."))
+            country_select.select_by_index(1)
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//select/option[text()='Select a state']/../..")))
+
+        except Exception as e:
+            self.fail(f"Could not select country: {e}")
+
+        # 7. Select a first state only after selecting country and click on some place, to avoid country selector hide state selector.
+        try:
+            state_select = Select(self.driver.find_element(By.XPATH, "//select/option[text()='Select a state']/../.."))
+            state_select.select_by_index(1)
+
+            # Click somewhere else to ensure state selection is registered.
+            self.driver.find_element(By.CLASS_NAME, "login-register-area").click()
+
+        except Exception as e:
+            self.fail(f"Could not select state: {e}")
+
+        # 8. Submit the form.
+        try:
+            register_button = self.driver.find_element(By.XPATH, "//button[contains(.,'Register')]")
+            register_button.click()
+        except Exception as e:
+            self.fail(f"Register button not found or not clickable: {e}")
+
+        # 9. Wait for the page to redirect and confirm registration success.
+        try:
+            self.wait.until(EC.url_contains("/my-account"))
+            self.assertIn("/my-account", self.driver.current_url)
+        except Exception as e:
+            self.fail(f"Registration failed or redirect to my-account failed: {e}")
+
+if __name__ == "__main__":
+    unittest.main()

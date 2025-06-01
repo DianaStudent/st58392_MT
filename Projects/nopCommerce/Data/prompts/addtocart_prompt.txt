@@ -1,0 +1,47 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structures and UI screenshots for the add-to-cart process.
+
+html_data: {html_data}
+
+Use this URL "http://localhost/"
+
+Test requirements:
+
+Generate a Python Selenium test that strictly follows all steps of the add-to-cart process.
+The test must start at the first page in the process and proceed step by step until completion.
+Selectors must be used exclusively from html_data. If an element is not in html_data, do not reference it.
+Each UI interaction (clicks, form input, navigation) must be applied only to elements explicitly present in html_data.
+Before interacting with any element, the test must explicitly verify its presence in the DOM and its visibility using WebDriverWait.
+If an element is not found, the test must log an error message but not crash immediately. The test should fail with a meaningful message.
+Assertions must verify the expected UI changes immediately after interactions.
+If a button, input field, or UI component is referenced in the test, it must match the elements in html_data exactly.
+The test must validate that the product is successfully added to the cart by checking the mini-cart contents, ensuring the correct product name and quantity appear.
+The test must handle cases where UI elements take longer to load by using an increased timeout for WebDriverWait (e.g., 20 seconds for critical elements like checkout buttons).
+If the expected mini-cart does not open, the test must attempt to trigger it manually before failing.
+Use WebDriverWait to handle dynamic elements and page transitions. Ensure that buttons, form fields, and popups have loaded before interacting with them.
+Use screenshots to verify the expected visual state of the UI at different stages of the process.
+The test should refresh or interact with the UI if necessary to trigger updates (e.g., clicking on a button to open a mini-cart).
+If a product or UI component is expected to appear, the test must wait until it becomes visible instead of checking too soon.
+Log every action taken (e.g., "Clicked 'Add to Cart' button") to provide debugging context.
+If an assertion fails, log the actual vs expected result (e.g., "Expected product in cart: 'Product A', Found: ''").
+If an expected element is not found, retry searching up to three times before failing.
+Include setUp() to initialize the browser and tearDown() to properly close it.
+If an assertion fails, log the actual vs expected result (e.g., "Expected product in cart: 'Product A', Found: ''").
+If an expected element is not found, retry searching up to three times before failing.
+Include setUp() to initialize the browser and tearDown() to properly close it.
+
+The test must not rely solely on temporary popup visibility (e.g., product added notification) to proceed.
+If the mini-cart does not automatically appear after adding a product:
+- The test must move the mouse cursor to the cart icon to manually trigger the mini-cart.
+- Before asserting mini-cart contents, the test must ensure it is visible via hover or click.
+- If the mini-cart is not visible after adding a product, retry hovering over the cart icon up to 3 times before failing.
+- The test must also handle cases where user interaction (like closing the popup) affects visibility of cart components.
+In all cases, if a notification appears after adding a product to the cart, the test must attempt to close it by clicking the close icon. If the notification remains visible or interferes with further steps, the test must bypass it by directly navigating to the full cart page.
+Use screenshots to more clarify elements.
+Credentials to use:
+First name: Test
+Last name: User
+Email: test@user.com
+Password: test11
+
+Return only Python code for the test.
+

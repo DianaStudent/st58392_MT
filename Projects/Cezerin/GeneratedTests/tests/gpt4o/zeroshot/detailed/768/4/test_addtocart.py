@@ -1,0 +1,51 @@
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
+class AddToCartTest(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        self.driver.get('http://localhost:3000/')
+        self.wait = WebDriverWait(self.driver, 20)
+
+    def test_add_to_cart(self):
+        # Open Home Page
+        driver = self.driver
+
+        # Click on Category A
+        category_a_selector = "a[href='/category-a']"
+        category_a = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, category_a_selector)))
+        category_a.click()
+
+        # Select the first product (Product A)
+        product_a_selector = "a[href='/category-a/product-a']"
+        product_a = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, product_a_selector)))
+        product_a.click()
+
+        # Click the "Add to cart" button
+        add_to_cart_button_selector = "button.button.is-success.is-fullwidth"
+        add_to_cart_button = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, add_to_cart_button_selector)))
+        add_to_cart_button.click()
+
+        # Click on the cart icon (shopping bag)
+        cart_button_selector = "span.cart-button"
+        cart_button = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, cart_button_selector)))
+        cart_button.click()
+
+        # Wait for the mini-cart to become visible
+        go_to_checkout_selector = "a[href='/checkout']"
+        go_to_checkout_button = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, go_to_checkout_selector)))
+
+        # Verify that the "GO TO CHECKOUT" button is present
+        if not go_to_checkout_button:
+            self.fail("GO TO CHECKOUT button is not present in the mini-cart")
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()

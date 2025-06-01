@@ -1,0 +1,48 @@
+You are an expert in Selenium automation. Below is a dataset containing detailed HTML structure 
+and a textual description of UI screenshots for the 'checkout-detailed' process.
+
+html_data: {html_data}
+
+screenshots_description: {screen_description}
+
+Task:
+Generate a Python Selenium test that strictly follows the described process using only elements from the HTML structure and visual layout.
+URL: http://localhost:8000/dk
+Test scenario:
+1. Open home page.
+2. Click the menu button ("Menu").
+3. Click the "Store" link.
+4. Click on a product image (Thumbnail) - first product.
+5. Select size by clicking the size button "L".
+6. Add the product to the cart.
+7. Explicitly click the cart button to open the cart.
+8. Click "Go to checkout", fill checkout fields:
+ - First name: user
+ - Last name: test
+ - Address: street 1
+ - Postal code: LV-1021
+ - City: Riga
+ - Country: Denmark - combo box
+ - Email: user@test.com
+9. Click "Continue to delivery"
+10. Select delivery method - radio button
+11. Click "Continue to payment"
+12. Select payment method - radio button
+13. Click "Continue to review"
+14. Click "Place Order".
+15. Verify the confirmation page contains: "Your order was placed successfully"
+
+
+Rules:
+- After adding a product to the cart, the test must click on the cart button (shopping bag) - Wait for presence of "GO TO CHECKOUT" button using html_data.
+- Fill required checkout fields (e.g. email, phone, shipping address, Shipping, payment).
+- After placing the order, the test must confirm that the final success page contains the text: "Your order was placed successfully".
+- When locating elements, always prefer using data-testid attributes if they exist in html_data
+- Use selectors strictly from html_data.
+- Use WebDriverWait with a timeout of 20 seconds before interacting with elements.
+- Use unittest with setUp() and tearDown().
+- Before asserting any element or text, check that it exists and is not empty.
+- If any required element is missing, fail the test using self.fail(...).
+Return only Python code using unittest.
+
+Return only Python code using unittest.

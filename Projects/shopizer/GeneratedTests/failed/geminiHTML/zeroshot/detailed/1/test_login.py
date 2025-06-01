@@ -1,0 +1,57 @@
+from selenium.webdriver.support.expected_conditions import presence_of_element_located, element_to_be_clickable, text_to_be_present_in_element
+import unittest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+class LoginTest(unittest.TestCase):
+
+    def setUp(self):
+        service = Service(executable_path=ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service)
+        self.driver.get("http://localhost/")
+        self.driver.maximize_window()
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_login(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 20)
+
+        # Accept cookies
+        try:
+            cookie_button = wait.until(EC.element_to_be_clickable((By.ID, "rcc-confirm-button")))
+            cookie_button.click()
+        except:
+            pass
+
+        # Click account icon
+        account_button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "account-setting-active")))
+        account_button.click()
+
+        # Click Login link
+        login_link = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[text()='Login']")))
+        login_link.click()
+
+        # Wait for login form
+        username_field = wait.until(EC.element_to_be_clickable((By.NAME, "username")))
+        password_field = wait.until(EC.element_to_be_clickable((By.NAME, "loginPassword")))
+
+        # Fill in the form
+        username_field.send_keys("test2@user.com")
+        password_field.send_keys("test**11")
+
+        # Click Login button
+        login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Login')]")))
+        login_button.click()
+
+        # Wait for redirection and verify URL
+        wait.until(EC.url_contains("/my-account"))
+        self.assertIn("/my-account", driver.current_url)
+
+if __name__ == "__main__":
+    unittest.main()
