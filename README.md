@@ -19,6 +19,13 @@ All of them are available in GitHub:
 - ../Scripts/gpt4o
 - ../Scripts/loop
 
+**Locally installed LLM models**  
+Open-source models must be downloaded, configured, and fully operational on the local machine:
+
+- LLaVA-LLaMA3.1:8B
+- LLaVA-7B
+- LLaVA-LLaMA3
+
 ## 1. Data Collection
 
 Each project has a dedicated script folder for collecting DOM structure (HTML) and screenshots for specific user flows.
