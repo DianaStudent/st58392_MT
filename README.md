@@ -354,10 +354,10 @@ This file serves as a reference for all further automated correction stages.
 
 These files summarize the outcome of test generation, execution, feedback loops and mutation testing:
 
-- `all_fulldump_fin.csv` — full log of all generated test executions across models and configurations (`runTestsBatch.py`).
-- `mutation_report_FIN.csv` — result log from mutation tests (`runTestsMut.py`).
-- `feedback_report_all_FIN.csv` — tracks iterative generations using feedback-based prompting .
-- `resultsFIN.ipynb` — Jupyter notebook used for aggregating, visualizing, and comparing results (collectLoopResults.py).
+- `all_fulldump_fin.csv` — full log of all generated test executions across models and configurations (`runTestsBatch.py`)
+- `mutation_report_FIN.csv` — result log from mutation tests (`runTestsMut.py`)
+- `feedback_report_all_FIN.csv` — tracks iterative generations using feedback-based prompting (`collectLoopResults.py`)
+- `resultsFIN.ipynb` — Jupyter notebook used for aggregating, visualising and comparing results
 
 ---
 
