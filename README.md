@@ -3,13 +3,19 @@
 For correct execution of the pipeline, the following components must be installed and configured:
 
 - **Locally deployed web applications**  
-  All target systems (Cezerin, nopCommerce, PrestaShop, Shopizer) must be installed and accessible on `localhost`.
+   All target systems (Cezerin, nopCommerce, PrestaShop, Shopizer) must be installed and accessible on `localhost`.
   All of them are available in GitHub:
-- Cezerin https://github.com/Cezerin/cezerin
-- nopCommerce https://github.com/nopSolutions/nopCommerce
-- PrestaShop https://github.com/PrestaShop/PrestaShop
-- Shopizer https://github.com/shopizer-ecommerce/shopizer
-- Medusa https://github.com/medusajs/medusa
+  -- Cezerin https://github.com/Cezerin/cezerin
+  -- nopCommerce https://github.com/nopSolutions/nopCommerce
+  -- PrestaShop https://github.com/PrestaShop/PrestaShop
+  -- Shopizer https://github.com/shopizer-ecommerce/shopizer
+  -- Medusa https://github.com/medusajs/medusa
+
+- **Valid API keys**  
+  API credentials (for OpenAI and VertexAI) must be saved in maps:
+  -- ../Scripts/gemini
+  -- ../Scripts/gpt4o
+  -- ../Scripts/loop
 
 ## 1. Data Collection
 
