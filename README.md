@@ -2,16 +2,6 @@
 
 For correct execution of the pipeline, the following components must be installed and configured:
 
-**Locally deployed web applications**  
- All target systems (Cezerin, nopCommerce, PrestaShop, Shopizer) must be installed and accessible on `localhost`.
-All of them are available in GitHub:
-
-- Cezerin https://github.com/Cezerin/cezerin
-- nopCommerce https://github.com/nopSolutions/nopCommerce
-- PrestaShop https://github.com/PrestaShop/PrestaShop
-- Shopizer https://github.com/shopizer-ecommerce/shopizer
-- Medusa https://github.com/medusajs/medusa
-
 **Valid API keys**  
  API credentials (for OpenAI and VertexAI) must be saved in maps:
 
@@ -25,6 +15,47 @@ Open-source models must be downloaded, configured, and fully operational on the 
 - LLaVA-LLaMA3.1:8B
 - LLaVA-7B
 - LLaVA-LLaMA3
+
+**Locally deployed web applications**  
+ All target systems (Cezerin, nopCommerce, PrestaShop, Shopizer) must be installed and accessible on `localhost`.
+All of them are available in GitHub:
+
+- Cezerin https://github.com/Cezerin/cezerin
+- nopCommerce https://github.com/nopSolutions/nopCommerce
+- PrestaShop https://github.com/PrestaShop/PrestaShop
+- Shopizer https://github.com/shopizer-ecommerce/shopizer
+- Medusa https://github.com/medusajs/medusa
+
+## Project Contents
+
+The repository is organized into the following top-level components:
+
+- **Projects/**  
+  Contains per-application folders (`Medusa`, `nopCommerce`,`nopCommerce`, `PrestaShop`, `Shopizer`), each including:
+
+  - `Data/` — HTML data, prompts, screenshots
+  - `GeneratedTests/` — structured outputs of test generation and execution
+
+- **Scripts/**  
+  All core pipeline logic:
+
+  - `compress_html/` — HTML cleaning scripts per project
+  - `gpt/`, `gemini/`, `lLaMa/` — test generation scripts for each model
+  - `loop/` — feedback-loop generation
+  - `manualValidation/` — fix scripts used during and after manual validation
+  - `mutation/` — mutation testing scripts
+  - `resolution_scr/`— screenshot resolutions scripts
+  - `testExecution/` — running and evaluating generated tests
+
+- **Visualizations/**  
+  Reports and artifacts used for evaluation and documentation:
+
+  - `ManualValidation/` — manually annotated CSV file
+  - `Results/` — final evaluation outputs and summary notebooks
+  - `StateOfTheArt/` — citation data and visualizations for the literature review
+
+- **README.md**  
+  Pipeline documentation and usage guide.
 
 ## 1. Data Collection
 
