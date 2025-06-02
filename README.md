@@ -405,8 +405,6 @@ Below is a full reference table:
 | `Scripts/manualValidation/ copyFailed.py`              | Copy failed tests after execution for fixing                | Failed test results                                                                                   | `.py` test scripts → `failed/` |
 | `Scripts/manualValidation/ fixClick.py`                | Fix `.click()` issues and misused wait conditions           | Failed test scripts                                                                                   | Fixed test scripts             |
 
-> You can find usage instructions and examples for most tools in Sections 1–5 of this README.
-
 > For full usage, see sections 1–5 of this README.
 
 ## 7. Contribution & Licensing
