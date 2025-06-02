@@ -230,7 +230,7 @@ python runTestsMut.py        # Executes tests under mutation and logs results
 
 ### 4.2 Output File Structure
 
-All generated outputs are saved under the corresponding project folder inside `Projects/<ProjectName>/GeneratedTests/`.
+All generated outputs are saved under the corresponding project folder inside `Projects/<ProjectName>/GeneratedTests/`
 
 #### Test Outputs (`tests/`)
 
@@ -245,9 +245,11 @@ Initial generated test scripts are saved in structured directories based on:
 `Projects/<ProjectName>/GeneratedTests/tests/<Model>/<PromptType>/<Complexity>/<Resolution>/<RunNumber>/`
 
 Examples:
+
 `Projects/Cezerin/GeneratedTests/tests/gpt4o/zeroshot/simple/1024/2/test_addtocart.py`
 `Projects/nopCommerce/GeneratedTests/tests/llava7bllama3.1.8b/ui/detailed/768/1/test_filter.py`
 `Projects/PrestaShop/GeneratedTests/tests/geminiHTML/feedback/medium/3/test_checkout.py`
+
 _For HTML-only generations, the `<Resolution>` folder is omitted._
 
 #### Test Outputs (`testsURLchange/`)
@@ -320,11 +322,12 @@ This workflow allows semi-automated recovery and repair of partially broken LLM-
 Scripts executed via `getGPTLoop.py` or `getGeminiLoop.py` produce structured outputs per iteration:
 
 `Projects/<ProjectName>/GeneratedTests/tests/<Model>/feedback/<RunNumber>/`
-├── loops/ # All looped generations per prompt
-├── success/ # Final successful version (if any)
+
+loops/ # All looped generations per prompt
+success/ # Final successful version (if any)
+
 Example:
 `Projects/Shopizer/GeneratedTests/tests/gpt4o/feedback/3/success/test_addtocart.py`
---
 
 #### Reports and Logs
 
