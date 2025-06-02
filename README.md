@@ -99,7 +99,7 @@ python getData&lt;ProcessName&gt;.py</pre>
 For each project, a dedicated script is used to clean and compress the raw HTML files by removing irrelevant tags, styles and scripts.
 
 - Scripts are located at:
-  Scripts/compress_html/
+  `Scripts/compress_html/`
   Examples:
 
   - `compressHTMLceserin.py`
@@ -108,30 +108,33 @@ For each project, a dedicated script is used to clean and compress the raw HTML 
   - `compressHTMLshopizer.py`
 
   - Output cleaned HTML files are saved as JSON:
-    Projects/<ProjectName>/Data/cleanData/<process>\_html.json
+    `Projects/<ProjectName>/Data/cleanData/<process>\_html.json`
 
 ### 2.2 Screenshot Resolution Generation
 
 To create resolution-specific versions of screenshots (for simulating different screen sizes), the following script is used:
-Scripts/resolution_scr/resolutionCh.py - For each screenshot set, resized copies are created in the following resolutions:
+`Scripts/resolution_scr/resolutionCh.py` - For each screenshot set, resized copies are created in the following resolutions:
 
 - `672x672`
 - `768x768`
 - `1024x1024`
 
 - Output folder structure:
-  Projects/<ProjectName>/Data/screenshots/resolution/<resolution>/<process>\_screen
+  `Projects/<ProjectName>/Data/screenshots/resolution/<resolution>/<process>\_screen`
   Example:
-  code/Projects/Cezerin/Data/screenshots/resolution/672/addtocart_screen/addtocart_screen1.png
+  `code/Projects/Cezerin/Data/screenshots/resolution/672/addtocart_screen/addtocart_screen1.png`
 
 ### 2.3 How to Run
 
 Run the corresponding cleaning script:
-cd Scripts/compress_html
-python compressHTML<project>.py
+
+<pre>cd Scripts/compress_html
+python compressHTML<project>.py</pre>
+
 Run screenshot rescaling:
-cd Scripts/resolution_scr
-python resolutionCh.py
+
+<pre>cd Scripts/resolution_scr
+python resolutionCh.py</pre>
 
 ## 3. Prompt Management
 
