@@ -57,8 +57,6 @@ The repository is organized into the following top-level components:
 - **README.md**  
   Pipeline documentation and usage guide.
 
-## Project Contents
-
 ## 1. Data Collection
 
 Each project has a dedicated script folder for collecting DOM structure (HTML) and screenshots for specific user flows.
