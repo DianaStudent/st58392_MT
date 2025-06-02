@@ -30,13 +30,13 @@ All of them are available in GitHub:
 
 The repository is organized into the following top-level components:
 
-- **Projects/**  
+- **`Projects/`**  
   Contains per-application folders (`Cezerin`, `Medusa`, `nopCommerce`, `PrestaShop`, `Shopizer`), each including:
 
   - `Data/` — HTML data, prompts, screenshots
   - `GeneratedTests/` — structured outputs of test generation and execution
 
-- **Scripts/**  
+- **`Scripts/`**  
   All core pipeline logic:
 
   - `compress_html/` — HTML cleaning scripts per project
@@ -47,14 +47,14 @@ The repository is organized into the following top-level components:
   - `resolution_scr/`— screenshot resolutions scripts
   - `testExecution/` — running and evaluating generated tests
 
-- **Visualizations/**  
+- **`Visualizations/`**  
   Reports and artifacts used for evaluation and documentation:
 
   - `ManualValidation/` — manually annotated CSV file
   - `Results/` — final evaluation outputs and summary notebooks
   - `StateOfTheArt/` — citation data and visualizations for the literature review
 
-- **README.md**  
+- **`README.md`**  
   Pipeline documentation and usage guide.
 
 ## 1. Data Collection
