@@ -165,64 +165,68 @@ e.g.:
 
 ## 4. Script Execution and Test Generation
 
-All scripts are organized into logical subfolders based on functionality: model type, purpose, or execution role.
+All test generation and evaluation scripts are located in the `Scripts/` directory. They are organized into subfolders based on their functionality: model type, generation strategy, mutation handling and test execution.
 
-### 4.1 Script Structure
+### 4.1. Subfolders and Core Scripts
 
-Scripts are located at:
-Scripts/<Category>/
+- **gemini/**  
+  Test generation using Gemini-2.0-flash-001. API KEYS AREN'T NOT PROVIDED
+  - `getGemini.py` — for test generation in full data mode (HTML + screenshots)
+  - `getGeminiHTML.py` — for test generation in partial data mode (HTML-only)
 
-#### Script Categories:
+<pre>cd Scripts/gemini
+python getGemini.py</pre>
 
-- **Loop/**
+- **gpt/**  
+  Test generation using GPT-4o. API KEYS AREN'T NOT PROVIDED
+  - `getGPT.py` — for functional test generation in full data mode (HTML + screenshots)
+  - `getGPTui.py` — for UI test generation in full data mode (HTML + screenshots)
+  - `getGPTHTML.py` — for all test generation in partial data mode (HTML only)
 
-  - getGPTLoop.py — performs iterative test generation using GPT-4o with feedback loop.
-  - collectLoopResults.py — collects and structures outputs from GPT-4o feedback loop generations.
+<pre>cd Scripts/gpt
+python getGPT.py</pre>
 
-- **gemini/** - NEED UPDATE
+- **lLaMa/**  
+  Scripts for LLaMA-based test generation across different model sizes.
 
-  - getGPT.py — generates Selenium tests using GPT-4o with HTML + screenshots.
-  - getGPTui.py — generates UI-specific test cases using GPT-4o.
-  - getGPTuiHTML.py — same as above but without screenshots.
-  - getGPTHTML.py — experimental script for HTML-only prompt generation.
-  - openai_key.env — OpenAI key for accessing GPT-4o. **NOT PROVIDED IN REPO**
+  - `getLLaMa3.py` — for test generation in full data mode (HTML + screenshots) with LLaVA-LLaMA3 (llava-llama-3-8b-v1.1)
+  - `getLLaMa3HTML.py` — for test generation in partial data mode (HTML-only) with LLaVA-LLaMA3 (llava-llama-3-8b-v1.1)
+  - `getLLaMa3.1.8B.py` — for test generation in full data mode (HTML + screenshots) with LLaVA:7b combined with LLaMA3.1:8b
+  - `getLLaMa3.1.8BHTML.py` — for test generation in partial data mode (HTML-only) with LLaMA3.1:8b
 
-- **gpt/**
+<pre>cd Scripts/lLaMa
+python getLLaMa3.1.8B.py</pre>
 
-  - getGPT.py — generates Selenium tests using GPT-4o with HTML + screenshots.
-  - getGPTui.py — generates UI-specific test cases using GPT-4o.
-  - getGPTuiHTML.py — same as above but without screenshots.
-  - getGPTHTML.py — experimental script for HTML-only prompt generation.
-  - openai_key.env — OpenAI key for accessing GPT-4o. **NOT PROVIDED IN REPO**
+- **loop/**  
+  Implements multi-step test generation with feedback loop.
+  - `getGPTLoop.py` — performs iterative generation using GPT-4o and adaptive prompts.
+  - `geminiLoop.py` — performs iterative generation using Gemini-2.0-flash-001 and adaptive prompts.
+  - `collectLoopResults.py` — aggregates outputs across feedback iterations.
 
-- **LLaMa/**
+<pre>cd Scripts/loop
+python getGPTLoop.py</pre>
 
-  - getLlamaBig.py, getLlamaBigStructure.py — LLaVA 79B: with and without screenshots.
-  - getLlamaSmall.py, getLlamaSmallStructure.py — LLaVA 7B: with and without screenshots.
-  - getSeleniumLLaMaProcNew.py — main script for launching LLaVA-based test generation (all configurations).
-  - getSeleniumLLaMaProc.py — legacy version (not used).
+- **testExecution/**  
+  Scripts for running generated tests, collecting execution statistics and generates reports.
 
-- **PromptsGenLLaMa/**
+  - `runTestsBatch.py` — main test runner; splits execution into small batches (25 tests) for performance.
+  - `runAll.py` — script called by `runTestsBatch.py` to execute each batch.
+  - `step_counter_patch.py` — counts executed steps per test without modifying the test source code. Used internally by `runAll.py`.
 
-  - prepLlamaPromts.py — transforms GPT prompts into LLaVA format (image-based).
-  - prepLlamaPromtsHTML.py — same transformation for HTML-only prompts.
+<pre>cd Scripts/testExecution
+python runTestsBatch.py</pre>
 
-- **testExecution/**
+- **mutation/**  
+  Scripts for performing mutation testing to evaluate test robustness under changes in UI structure or functionality.
 
-  - runAllTests.py — main test runner. Executes all tests, counts steps, generates reports.
-  - runTests.py, runTestsUI.py, runTestsHTML.py, runTestsUIHTML.py — older or mode-specific variants (mostly deprecated).
-  - step_counter_patch.py — utility for comparing generated step count and actual execution results.
+  - `collectSuccess.py` — selects and copies only the tests that passed in the original (non-mutated) execution phase. These are used as input for mutation testing.
+  - `runTestsMut.py` — executes existing successful tests under mutation conditions (e.g., removed buttons, layout changes). Logs execution results to `mutation_report_FIN.csv`, including expected outcomes and pass/fail mismatches.
 
-- **mutation/**
-
-  - runTestsMut.py, runTestsMutOld.py — executes mutation testing, checks test resiliency.
-  - collectSuccess.py — extracts successful tests only (used in mutation testing).
-
-- **other/**
-  - newRun.py — unclear functionality, under inspection.
-  - stepCoverage.py — deprecated script for test step coverage (not used).
-
----
+<pre>
+cd Scripts/mutation
+python collectSuccess.py     # Collects successful original tests
+python runTestsMut.py        # Executes tests under mutation and logs results
+</pre>
 
 ### 4.2 Output File Structure
 
