@@ -374,3 +374,29 @@ Resources related to the literature review and citation management for the thesi
 - `stateOfTheArt.ipynb` — notebook for analysing scientific publication sample
 
 ---
+
+## 6. CLI Tools Reference
+
+Below is a quick reference table of frequently used CLI scripts:
+
+| Script Path                              | Description                                      | Input                                   | Output                     |
+| ---------------------------------------- | ------------------------------------------------ | --------------------------------------- | -------------------------- |
+| `Scripts/gpt/getGPT.py`                  | Generate tests using GPT-4o (HTML + screenshots) | Clean HTML + screenshots + prompts      | `.py` test scripts         |
+| `Scripts/gemini/getGeminiHTML.py`        | Generate tests using Gemini (HTML-only)          | Clean HTML + prompts                    | `.py` test scripts         |
+| `Scripts/lLaMa/getLLaMa3.py`             | Generate tests using LLaVA-LLaMA3                | Clean HTML + screenshots + prompts      | `.py` test scripts         |
+| `Scripts/loop/getGPTLoop.py`             | Feedback-based test generation with GPT-4o       | Prompt template + history               | Loop-based test scripts    |
+| `Scripts/testExecution/runTestsBatch.py` | Run all tests in batches (25/test max)           | `.py` test scripts                      | CSV logs                   |
+| `Scripts/mutation/runTestsMut.py`        | Run tests under mutation (UI/URL changes)        | Validated `.py` tests + mutation config | `mutation_report_FIN.csv`  |
+| `Scripts/manualValidation/fixClick.py`   | Patch clickability errors in failed test cases   | `.py` test scripts (post-failure)       | Patched `.py` test scripts |
+| `Scripts/resolution_scr/resolutionCh.py` | Generate resolution variants of screenshots      | Raw screenshots                         | Rescaled screenshots       |
+
+> For full usage, see sections 1–5 of this README.
+
+## 7. Contribution & Licensing
+
+This repository was developed as part of a master’s thesis project and is intended for **research and educational purposes only**.
+
+- This project uses both commercial (OpenAI GPT-4o and Gemini) and open-source (lLaVA, lLaMA) models for test generation.
+- API keys and model access are not included.
+- All third-party models and tools are used in compliance with their respective licenses.
+- Contributions are not currently accepted, but forks for non-commercial academic use are welcome
