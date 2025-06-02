@@ -133,4 +133,5 @@ for iteration in range(3):
                         prompt_type, prompt_template, output_folder
                     )
 
-print(f"FIN {(time.time() - start_time).total_seconds():.2f} seconds")
+print(f"FIN {(time.time() - start_time):.2f} seconds")
+
