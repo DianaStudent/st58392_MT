@@ -168,7 +168,7 @@ All test generation and evaluation scripts are located in the `Scripts/` directo
 ### 4.1. Subfolders and Core Scripts
 
 - **`gemini/`**  
-  Test generation using Gemini-2.0-flash-001. API KEYS AREN'T NOT PROVIDED
+  Test generation using Gemini-2.0-flash-001. API KEYS AREN'T PROVIDED
   - `getGemini.py` — for test generation in full data mode (HTML + screenshots)
   - `getGeminiHTML.py` — for test generation in partial data mode (HTML-only)
 
@@ -176,7 +176,7 @@ All test generation and evaluation scripts are located in the `Scripts/` directo
 python getGemini.py</pre>
 
 - **`gpt/`**  
-  Test generation using GPT-4o. API KEYS AREN'T NOT PROVIDED
+  Test generation using GPT-4o. API KEYS AREN'T PROVIDED
   - `getGPT.py` — for functional test generation in full data mode (HTML + screenshots)
   - `getGPTui.py` — for UI test generation in full data mode (HTML + screenshots)
   - `getGPTHTML.py` — for all test generation in partial data mode (HTML only)
@@ -398,7 +398,7 @@ Below is a full reference table:
 | `Scripts/loop/geminiLoop.py`                           | Run feedback-based generation using Gemini                  | Clean HTML + screenshots + initial prompt + loop prompt + previously generated test + traceback error | Iterative `.py` scripts        |
 | `Scripts/loop/collectLoopResults.py`                   | Report generation for feedback loop results                 | Feedback `.py` test scripts                                                                           | `feedback_report_all_FIN.csv`  |
 | `Scripts/testExecution/ runTestsBatch.py`              | Run all generated tests in batches (25/test max)            | Generated `.py` test scripts                                                                          | `all_fulldump_fin.csv`         |
-| `Scripts/mutation/collectSuccess.py`                   | Collect successfull tests for mutation testing              | Initial test execution report + generated `.py` test scripts                                          | Copied `.py` test files        |
+| `Scripts/mutation/collectSuccess.py`                   | Collect successful tests for mutation testing               | Initial test execution report + generated `.py` test scripts                                          | Copied `.py` test files        |
 | `Scripts/mutation/runTestsMut.py`                      | Run tests under mutation (e.g., removed buttons)            | `.py` test scripts + mutation settings                                                                | `mutation_report_FIN.csv`      |
 | `Scripts/manualValidation/ URLUpdate.py`               | Fix incorrect or inconsistent test URLs                     | `.py` scripts from `tests/                                                                            | Fixed test scripts             |
 | `Scripts/manualValidation/ driverUpdate.py`            | Fix WebDriver logic                                         | `.py` scripts from `testsURLchange/`                                                                  | Fixed test scripts             |
