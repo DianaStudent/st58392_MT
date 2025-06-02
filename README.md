@@ -381,42 +381,42 @@ This section lists all key scripts available in the repository. All tools are de
 
 Below is a full reference table:
 
-| Script Path                                               | Description                                                 | Input                                  | Output                         |
-| --------------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------- | ------------------------------ |
-| `Projects/<Project>/Data/<br>getData/getDataAddtocart.py` | Collect HTML + screenshots for "Add to Cart" flow           | Running web app                        | Raw HTML + `.png` screenshots  |
-| `Projects/<Project>/Data/<br>getData/getDataCheckout.py`  | Collect HTML + screenshots for "Checkout" flow              | Running web app                        | Raw HTML + `.png` screenshots  |
-| `Projects/<Project>/Data/<br>getData/getDataFilter.py`    | Collect HTML + screenshots for "Filter" flow                | Running web app                        | Raw HTML + `.png` screenshots  |
-| `Projects/<Project>/Data/<br>getData/getDataLogin.py`     | Collect HTML + screenshots for "Login" flow                 | Running web app                        | Raw HTML + `.png` screenshots  |
-| `Projects/<Project>/Data/<br>getData/getDataRegister.py`  | Collect HTML + screenshots for "Register" flow              | Running web app                        | Raw HTML + `.png` screenshots  |
-| `Projects/<Project>/Data/<br>getData/getDataUi.py`        | Collect UI overview data (navigation, homepage, etc.)       | Running web app                        | Raw HTML + `.png` screenshots  |
-| `Scripts/gpt/getGPT.py`                                   | Generate functional tests using GPT-4o (HTML + screenshots) | Clean HTML + screenshots + prompts     | `.py` test scripts             |
-| `Scripts/gpt/getGPTui.py`                                 | Generate UI tests using GPT-4o (HTML + screenshots)         | UI HTML + screenshots                  | `.py` test scripts             |
-| `Scripts/gpt/getGPTHTML.py`                               | Generate tests using GPT-4o (HTML-only)                     | Clean HTML + prompts                   | `.py` test scripts             |
-| `Scripts/gemini/getGemini.py`                             | Generate tests using Gemini (HTML + screenshots)            | Clean HTML + screenshots + prompts     | `.py` test scripts             |
-| `Scripts/gemini/getGeminiHTML.py`                         | Generate tests using Gemini (HTML-only)                     | Clean HTML + prompts                   | `.py` test scripts             |
-| `Scripts/lLaMa/getLLaMa3.py`                              | Generate tests using LLaVA-LLaMA3 (full input)              | Clean HTML + screenshots + prompts     | `.py` test scripts             |
-| `Scripts/lLaMa/getLLaMa3HTML.py`                          | Generate tests using LLaVA-LLaMA3 (HTML-only)               | Clean HTML + prompts                   | `.py` test scripts             |
-| `Scripts/lLaMa/getLLaMa3.1.8B.py`                         | Generate tests using LLaVA-7B + LLaMA3.1:8B (full input)    | Clean HTML + screenshots + prompts     | `.py` test scripts             |
-| `Scripts/lLaMa/getLLaMa3.1.8BHTML.py`                     | Generate tests using LLaVA-7B + LLaMA3.1:8B (HTML-only)     | Clean HTML + prompts                   | `.py` test scripts             |
-| `Scripts/loop/getGPTLoop.py`                              | Run feedback-based generation using GPT-4o                  | Prompt templates + prior loop history  | Iterative `.py` scripts        |
-| `Scripts/loop/geminiLoop.py`                              | Run feedback-based generation using Gemini                  | Prompt templates + prior loop history  | Iterative `.py` scripts        |
-| `Scripts/loop/collectLoopResults.py`                      | Aggregate loop generations and extract successful tests     | Feedback run outputs                   | Final `.py` test scripts + CSV |
-| `Scripts/testExecution/runTestsBatch.py`                  | Run all generated tests in batches (25/test max)            | Generated `.py` test scripts           | Execution CSV logs             |
-| `Scripts/testExecution/runALL.py`                         | Executes one batch of tests (called by `runTestsBatch.py`)  | Batch of `.py` test scripts            | Partial log or step count      |
-| `Scripts/testExecution/<br>step_counter_patch.py`         | Count test steps during execution without modifying source  | Live-executed `.py` tests              | Step count logs                |
-| `Scripts/mutation/collectSuccess.py`                      | Collect passing test cases for mutation testing             | Initial test execution logs            | Copied `.py` test files        |
-| `Scripts/mutation/runTestsMut.py`                         | Run tests under mutation (e.g., removed buttons)            | `.py` test scripts + mutation settings | `mutation_report_FIN.csv`      |
-| `Scripts/manualValidation/URLUpdate.py`                   | Fix incorrect or inconsistent test URLs                     | Validated `.py` scripts                | Patched test scripts           |
-| `Scripts/manualValidation/driverUpdate.py`                | Fix WebDriver logic (selectors, waits, etc.)                | `.py` scripts from `testsURLchange/`   | Updated test scripts           |
-| `Scripts/manualValidation/copyFailed.py`                  | Copy failed tests after execution for patching              | Failed test results                    | `.py` test scripts → `failed/` |
-| `Scripts/manualValidation/fixClick.py`                    | Fix `.click()` issues and misused wait conditions           | Failed test scripts                    | Patched `.py` test scripts     |
-| `Scripts/manualValidation/copyTests.py`                   | Utility for copying test sets across folders                | Arbitrary test sets                    | Duplicated test files          |
-| `Scripts/resolution_scr/resolutionCh.py`                  | Generate resolution-specific screenshot variants            | Raw screenshots                        | 672/768/1024 px screenshots    |
-| `Scripts/compress_html/<br>compressHTMLcezerin.py`        | Clean and compress HTML for Cezerin                         | Raw HTML JSON                          | Clean HTML JSON                |
-| `Scripts/compress_html/<br>compressHTMLmedusa.py`         | Same as above, for Medusa                                   | Raw HTML JSON                          | Clean HTML JSON                |
-| `Scripts/compress_html/<br>compressHTMLnopcommerce.py`    | Same as above, for nopCommerce                              | Raw HTML JSON                          | Clean HTML JSON                |
-| `Scripts/compress_html/<br>compressHTMLprestashop.py`     | Same as above, for PrestaShop                               | Raw HTML JSON                          | Clean HTML JSON                |
-| `Scripts/compress_html/<br>compressHTMLshopizer.py`       | Same as above, for Shopizer                                 | Raw HTML JSON                          | Clean HTML JSON                |
+| Script Path                                            | Description                                                 | Input                                  | Output                         |
+| ------------------------------------------------------ | ----------------------------------------------------------- | -------------------------------------- | ------------------------------ |
+| `Projects/<Project>/Data/ getData/getDataAddtocart.py` | Collect HTML + screenshots for "Add to Cart" flow           | Running web app                        | Raw HTML + `.png` screenshots  |
+| `Projects/<Project>/Data/ getData/getDataCheckout.py`  | Collect HTML + screenshots for "Checkout" flow              | Running web app                        | Raw HTML + `.png` screenshots  |
+| `Projects/<Project>/Data/ getData/getDataFilter.py`    | Collect HTML + screenshots for "Filter" flow                | Running web app                        | Raw HTML + `.png` screenshots  |
+| `Projects/<Project>/Data/ getData/getDataLogin.py`     | Collect HTML + screenshots for "Login" flow                 | Running web app                        | Raw HTML + `.png` screenshots  |
+| `Projects/<Project>/Data/ getData/getDataRegister.py`  | Collect HTML + screenshots for "Register" flow              | Running web app                        | Raw HTML + `.png` screenshots  |
+| `Projects/<Project>/Data/ getData/getDataUi.py`        | Collect UI overview data (navigation, homepage, etc.)       | Running web app                        | Raw HTML + `.png` screenshots  |
+| `Scripts/gpt/getGPT.py`                                | Generate functional tests using GPT-4o (HTML + screenshots) | Clean HTML + screenshots + prompts     | `.py` test scripts             |
+| `Scripts/gpt/getGPTui.py`                              | Generate UI tests using GPT-4o (HTML + screenshots)         | UI HTML + screenshots                  | `.py` test scripts             |
+| `Scripts/gpt/getGPTHTML.py`                            | Generate tests using GPT-4o (HTML-only)                     | Clean HTML + prompts                   | `.py` test scripts             |
+| `Scripts/gemini/getGemini.py`                          | Generate tests using Gemini (HTML + screenshots)            | Clean HTML + screenshots + prompts     | `.py` test scripts             |
+| `Scripts/gemini/getGeminiHTML.py`                      | Generate tests using Gemini (HTML-only)                     | Clean HTML + prompts                   | `.py` test scripts             |
+| `Scripts/lLaMa/getLLaMa3.py`                           | Generate tests using LLaVA-LLaMA3 (full input)              | Clean HTML + screenshots + prompts     | `.py` test scripts             |
+| `Scripts/lLaMa/getLLaMa3HTML.py`                       | Generate tests using LLaVA-LLaMA3 (HTML-only)               | Clean HTML + prompts                   | `.py` test scripts             |
+| `Scripts/lLaMa/getLLaMa3.1.8B.py`                      | Generate tests using LLaVA-7B + LLaMA3.1:8B (full input)    | Clean HTML + screenshots + prompts     | `.py` test scripts             |
+| `Scripts/lLaMa/getLLaMa3.1.8BHTML.py`                  | Generate tests using LLaVA-7B + LLaMA3.1:8B (HTML-only)     | Clean HTML + prompts                   | `.py` test scripts             |
+| `Scripts/loop/getGPTLoop.py`                           | Run feedback-based generation using GPT-4o                  | Prompt templates + prior loop history  | Iterative `.py` scripts        |
+| `Scripts/loop/geminiLoop.py`                           | Run feedback-based generation using Gemini                  | Prompt templates + prior loop history  | Iterative `.py` scripts        |
+| `Scripts/loop/collectLoopResults.py`                   | Aggregate loop generations and extract successful tests     | Feedback run outputs                   | Final `.py` test scripts + CSV |
+| `Scripts/testExecution/runTestsBatch.py`               | Run all generated tests in batches (25/test max)            | Generated `.py` test scripts           | Execution CSV logs             |
+| `Scripts/testExecution/runALL.py`                      | Executes one batch of tests (called by `runTestsBatch.py`)  | Batch of `.py` test scripts            | Partial log or step count      |
+| `Scripts/testExecution/ step_counter_patch.py`         | Count test steps during execution without modifying source  | Live-executed `.py` tests              | Step count logs                |
+| `Scripts/mutation/collectSuccess.py`                   | Collect passing test cases for mutation testing             | Initial test execution logs            | Copied `.py` test files        |
+| `Scripts/mutation/runTestsMut.py`                      | Run tests under mutation (e.g., removed buttons)            | `.py` test scripts + mutation settings | `mutation_report_FIN.csv`      |
+| `Scripts/manualValidation/URLUpdate.py`                | Fix incorrect or inconsistent test URLs                     | Validated `.py` scripts                | Patched test scripts           |
+| `Scripts/manualValidation/driverUpdate.py`             | Fix WebDriver logic (selectors, waits, etc.)                | `.py` scripts from `testsURLchange/`   | Updated test scripts           |
+| `Scripts/manualValidation/copyFailed.py`               | Copy failed tests after execution for patching              | Failed test results                    | `.py` test scripts → `failed/` |
+| `Scripts/manualValidation/fixClick.py`                 | Fix `.click()` issues and misused wait conditions           | Failed test scripts                    | Patched `.py` test scripts     |
+| `Scripts/manualValidation/copyTests.py`                | Utility for copying test sets across folders                | Arbitrary test sets                    | Duplicated test files          |
+| `Scripts/resolution_scr/resolutionCh.py`               | Generate resolution-specific screenshot variants            | Raw screenshots                        | 672/768/1024 px screenshots    |
+| `Scripts/compress_html/ compressHTMLcezerin.py`        | Clean and compress HTML for Cezerin                         | Raw HTML JSON                          | Clean HTML JSON                |
+| `Scripts/compress_html/ compressHTMLmedusa.py`         | Same as above, for Medusa                                   | Raw HTML JSON                          | Clean HTML JSON                |
+| `Scripts/compress_html/ compressHTMLnopcommerce.py`    | Same as above, for nopCommerce                              | Raw HTML JSON                          | Clean HTML JSON                |
+| `Scripts/compress_html/ compressHTMLprestashop.py`     | Same as above, for PrestaShop                               | Raw HTML JSON                          | Clean HTML JSON                |
+| `Scripts/compress_html/ compressHTMLshopizer.py`       | Same as above, for Shopizer                                 | Raw HTML JSON                          | Clean HTML JSON                |
 
 > You can find usage instructions and examples for most tools in Sections 1–5 of this README.
 
