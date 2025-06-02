@@ -5,16 +5,16 @@ For correct execution of the pipeline, the following components must be installe
 **Valid API keys**  
  API credentials (for OpenAI and VertexAI) must be saved in maps:
 
-- ../Scripts/gemini
-- ../Scripts/gpt4o
-- ../Scripts/loop
+- `Scripts/gemini`
+- `Scripts/gpt4o`
+- `Scripts/loop`
 
 **Locally installed LLM models**  
 Open-source models must be downloaded, configured, and fully operational on the local machine:
 
-- LLaVA-LLaMA3.1:8B
-- LLaVA-7B
-- LLaVA-LLaMA3
+- `LLaVA-LLaMA3.1:8B`
+- `LLaVA-7B`
+- `LLaVA-LLaMA3`
 
 **Locally deployed web applications**  
  All target systems (Cezerin, nopCommerce, PrestaShop, Shopizer) must be installed and accessible on `localhost`.
@@ -66,7 +66,7 @@ Each project has a dedicated script folder for collecting DOM structure (HTML) a
 ### 1.1 Script Location
 
 All data collection scripts are located at:
-Projects/<ProjectName>/Data/getData/
+`Projects/<ProjectName>/Data/getData/`
 
 Each script corresponds to a specific user flow based on projects. Example filenames:
 
@@ -82,7 +82,7 @@ Scripts are specific to each project, but follow the same naming and structure.
 ### 1.2 Output Locations
 
 - **HTML structure (as JSON):**
-  Projects/<ProjectName>/Data/getData/sourceData/
+  `Projects/<ProjectName>/Data/getData/sourceData/`
 
 ### 1.3 How to Run
 
@@ -90,6 +90,8 @@ Run Web App via Docker or CMD
 To collect data for a specific process:
 cd Projects/<ProjectName>/Data/getData
 python getData<ProcessName>.py
+
+<pre> cd Projects/&lt;ProjectName&gt;/Data/getData python getData&lt;ProcessName&gt;.py </pre>
 
 ## 2. Data Preprocessing
 
