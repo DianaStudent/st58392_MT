@@ -31,7 +31,7 @@ All of them are available in GitHub:
 The repository is organized into the following top-level components:
 
 - **Projects/**  
-  Contains per-application folders (`Medusa`, `nopCommerce`,`nopCommerce`, `PrestaShop`, `Shopizer`), each including:
+  Contains per-application folders (`Cezerin`, `Medusa`, `nopCommerce`, `PrestaShop`, `Shopizer`), each including:
 
   - `Data/` — HTML data, prompts, screenshots
   - `GeneratedTests/` — structured outputs of test generation and execution
@@ -57,6 +57,8 @@ The repository is organized into the following top-level components:
 - **README.md**  
   Pipeline documentation and usage guide.
 
+## Project Contents
+
 ## 1. Data Collection
 
 Each project has a dedicated script folder for collecting DOM structure (HTML) and screenshots for specific user flows.
@@ -64,66 +66,70 @@ Each project has a dedicated script folder for collecting DOM structure (HTML) a
 ### 1.1 Script Location
 
 All data collection scripts are located at:
-code/Projects/<ProjectName>/Data/getData/
+Projects/<ProjectName>/Data/getData/
 
 Each script corresponds to a specific user flow based on projects. Example filenames:
 
-- getDataAddtocart.py
-- getDataCheckout.py
-- getDataFilter.py
-- getDataLogin.py
-- getDataRegister.py
-- getDataUi.py
+- `getDataAddtocart.py`
+- `getDataCheckout.py`
+- `getDataFilter.py`
+- `getDataLogin.py`
+- `getDataRegister.py`
+- `getDataUi.py`
 
-Scripts are specific to each project, but follow the same naming and structure convention.
+Scripts are specific to each project, but follow the same naming and structure.
 
 ### 1.2 Output Locations
 
 - **HTML structure (as JSON):**
-  code/Projects/<ProjectName>/Data/getData/sourceData/
+  Projects/<ProjectName>/Data/getData/sourceData/
 
 ### 1.3 How to Run
 
-Run App via Docker or CMD
+Run Web App via Docker or CMD
 To collect data for a specific process:
-cd code/Projects/<ProjectName>/Data/getData
+cd Projects/<ProjectName>/Data/getData
 python getData<ProcessName>.py
 
 ## 2. Data Preprocessing
 
 ### 2.1 HTML Cleaning
 
-For each project, a dedicated script is used to clean and compress the raw HTML files by removing irrelevant tags, styles, and scripts.
+For each project, a dedicated script is used to clean and compress the raw HTML files by removing irrelevant tags, styles and scripts.
 
 - Scripts are located at:
-  code/Scripts/compress_html/
+  Scripts/compress_html/
   Examples:
 
-  - compressHTMLceserin.py
-  - compressHTMLnopcommerce.py
-  - compressHTMLprestashop.py
-  - compressHTMLshopizer.py
+  - `compressHTMLceserin.py`
+  - `compressHTMLnopcommerce.py`
+  - `compressHTMLprestashop.py`
+  - `compressHTMLshopizer.py`
 
   - Output cleaned HTML files are saved as JSON:
-    code/Projects/<ProjectName>/Data/cleanData/<process>\_html.json
+    Projects/<ProjectName>/Data/cleanData/<process>\_html.json
 
 ### 2.2 Screenshot Resolution Generation
 
 To create resolution-specific versions of screenshots (for simulating different screen sizes), the following script is used:
-code/Scripts/resolution_scr/resolutionCh.py - For each screenshot set, resized copies are created in the following resolutions: - 672x672 - 768x768 - 1024x1024
+Scripts/resolution_scr/resolutionCh.py - For each screenshot set, resized copies are created in the following resolutions:
 
-    - Output folder structure:
-    	code/Projects/<ProjectName>/Data/screenshots/resolution/<resolution>/<process>_screen/
-    Example:
-    	code/Projects/Cezerin/Data/screenshots/resolution/672/addtocart_screen/
+- `672x672`
+- `768x768`
+- `1024x1024`
+
+- Output folder structure:
+  Projects/<ProjectName>/Data/screenshots/resolution/<resolution>/<process>\_screen
+  Example:
+  code/Projects/Cezerin/Data/screenshots/resolution/672/addtocart_screen/addtocart_screen1.png
 
 ### 2.3 How to Run
 
 Run the corresponding cleaning script:
-cd code/Scripts/compress_html
+cd Scripts/compress_html
 python compressHTML<project>.py
 Run screenshot rescaling:
-cd code/Scripts/resolution_scr
+cd Scripts/resolution_scr
 python resolutionCh.py
 
 ## 3. Prompt Management
@@ -133,7 +139,7 @@ Prompts are manually created and stored per model, project, and task type. Each 
 ### 3.1 Prompt Folders
 
 Prompts are stored under:
-code/Projects/<ProjectName>/Data/prompts/<ModelName>/<PromptType>/
+Projects/<ProjectName>/Data/prompts/<ModelName>/<PromptType>/
 
 #### Prompt types:
 
@@ -151,8 +157,8 @@ e.g.: - addtocart_detailed_prompt.txt - checkout_loop_prompt.txt - filter_initia
 ### 3.2 LLaVA-Compatible Prompts
 
 To convert existing GPT-4o prompts to be compatible with LLaVA (different image processing format), two scripts are used:
-code/Scripts/prompts/prepLlamaPrompts.py
-code/Scripts/prompts/prepLlamaPromtsHTML.py - These scripts take existing GPT-4o prompts and modify them to fit LLaVA’s expected input format. - One script is for screenshot-based prompts, the other — for HTML-only cases.
+Scripts/prompts/prepLlamaPrompts.py
+Scripts/prompts/prepLlamaPromtsHTML.py - These scripts take existing GPT-4o prompts and modify them to fit LLaVA’s expected input format. - One script is for screenshot-based prompts, the other — for HTML-only cases.
 
 ## 4. Script Execution and Test Generation
 
@@ -161,7 +167,7 @@ All scripts are organized into logical subfolders based on functionality: model 
 ### 4.1 Script Structure
 
 Scripts are located at:
-code/Scripts/<Category>/
+Scripts/<Category>/
 
 #### Script Categories:
 
@@ -220,7 +226,7 @@ code/Scripts/<Category>/
 #### Generated Tests
 
 All test outputs are saved inside the following path:
-code/Projects/<ProjectName>/GeneratedTests/tests/<Model>/<PromptType>/<PromptComplexity>/<Resolution>/<RunNumber>/
+Projects/<ProjectName>/GeneratedTests/tests/<Model>/<PromptType>/<PromptComplexity>/<Resolution>/<RunNumber>/
 Examples: - With screenshots:
 code/Projects/Cezerin/GeneratedTests/tests/gpt4o/zeroshot/simple/1024/2/
 code/Projects/Cezerin/GeneratedTests/tests/llava7bllama3.1.8b/zeroshot/detailed/672/2/ - Without screenshots (HTML-only):
