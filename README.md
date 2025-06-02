@@ -148,8 +148,8 @@ Prompts are stored under:
 
 #### Prompt types:
 
-- zeroshot/ — written prompts with 3 deatail level - simple, medium and detailed
-- feedback/ — initial prompts + updated versions for feedback loop
+- `zeroshot/` — written prompts with 3 deatail level - simple, medium and detailed
+- `feedback/` — initial prompts + updated versions for feedback loop
 
 Example (GPT-4o, Cezerin):
 `Projects/Cezerin/Data/prompts/gpt4o/zeroshot/`
@@ -169,7 +169,7 @@ All test generation and evaluation scripts are located in the `Scripts/` directo
 
 ### 4.1. Subfolders and Core Scripts
 
-- **gemini/**  
+- **`gemini/`**  
   Test generation using Gemini-2.0-flash-001. API KEYS AREN'T NOT PROVIDED
   - `getGemini.py` — for test generation in full data mode (HTML + screenshots)
   - `getGeminiHTML.py` — for test generation in partial data mode (HTML-only)
@@ -177,7 +177,7 @@ All test generation and evaluation scripts are located in the `Scripts/` directo
 <pre>cd Scripts/gemini
 python getGemini.py</pre>
 
-- **gpt/**  
+- **`gpt/`**  
   Test generation using GPT-4o. API KEYS AREN'T NOT PROVIDED
   - `getGPT.py` — for functional test generation in full data mode (HTML + screenshots)
   - `getGPTui.py` — for UI test generation in full data mode (HTML + screenshots)
@@ -186,7 +186,7 @@ python getGemini.py</pre>
 <pre>cd Scripts/gpt
 python getGPT.py</pre>
 
-- **lLaMa/**  
+- **`lLaMa/`**  
   Scripts for LLaMA-based test generation across different model sizes.
 
   - `getLLaMa3.py` — for test generation in full data mode (HTML + screenshots) with LLaVA-LLaMA3 (llava-llama-3-8b-v1.1)
@@ -197,7 +197,7 @@ python getGPT.py</pre>
 <pre>cd Scripts/lLaMa
 python getLLaMa3.1.8B.py</pre>
 
-- **loop/**  
+- **`loop/`**  
   Implements multi-step test generation with feedback loop.
   - `getGPTLoop.py` — performs iterative generation using GPT-4o and adaptive prompts.
   - `getGeminiLoop.py` — performs iterative generation using Gemini-2.0-flash-001 and adaptive prompts.
@@ -206,7 +206,7 @@ python getLLaMa3.1.8B.py</pre>
 <pre>cd Scripts/loop
 python getGPTLoop.py</pre>
 
-- **testExecution/**  
+- **`testExecution/`**  
   Scripts for running generated tests, collecting execution statistics and generates reports.
 
   - `runTestsBatch.py` — main test runner; splits execution into small batches (25 tests) for performance.
@@ -216,7 +216,7 @@ python getGPTLoop.py</pre>
 <pre>cd Scripts/testExecution
 python runTestsBatch.py</pre>
 
-- **mutation/**  
+- **`mutation/`**  
   Scripts for performing mutation testing to evaluate test robustness under changes in UI structure or functionality.
 
   - `collectSuccess.py` — selects and copies only the tests that passed in the original (non-mutated) execution phase. These are used as input for mutation testing.
