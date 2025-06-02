@@ -11,7 +11,7 @@ base_dir = r"C:\Diana\MasterCode\Code\Projects"
 llava_url = "http://localhost:11434/api/generate"
 code_model = "llama3.1:8b"
 start_time = time.time()
-def generate_test_llama_only(project, process_name, html_data, llama_prompt, output_folder):
+def generate_test(project, process_name, html_data, llama_prompt, output_folder):
     try:
         html_prompt = llama_prompt.format(
             process_name=process_name,
@@ -66,7 +66,7 @@ for project in projects:
                         output_folder = os.path.join(output_base, "ui", prompt_type, "noimg", str(iteration))
                         os.makedirs(output_folder, exist_ok=True)
                         executor.submit(
-                            generate_test_llama_only,
+                            generate_test,
                             project, ui_process_name, html_data,
                             llama_prompt, output_folder
                         )
@@ -84,8 +84,9 @@ for project in projects:
                     output_folder = os.path.join(output_base, prompt_type, "noimg", str(iteration))
                     os.makedirs(output_folder, exist_ok=True)
                     executor.submit(
-                        generate_test_llama_only,
+                        generate_test,
                         project, process_name, html_data,
                         llama_prompt, output_folder
                     )
-print(f"FIN {(time.time() - start_time).total_seconds():.2f} seconds")
+print(f"FIN {(time.time() - start_time):.2f} seconds")
+

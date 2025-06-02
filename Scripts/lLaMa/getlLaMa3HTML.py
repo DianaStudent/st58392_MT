@@ -17,7 +17,7 @@ def load_prompt(path):
         raise FileNotFoundError(f"⚠️ Prompt not found: {path}")
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
-def run_generation(process_name, html_data, llama_prompt, output_folder):
+def generate_test(process_name, html_data, llama_prompt, output_folder):
     try:
         prompt = llama_prompt.format(
             process_name=process_name,
@@ -37,6 +37,7 @@ def run_generation(process_name, html_data, llama_prompt, output_folder):
         filepath = os.path.join(output_folder, filename)
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(code)
+        print(f"SUCCESS: {project}/{process_name} → {filename}")
     except Exception as e:
         print(f"ERROR: {process_name}: {e}")
 
@@ -61,7 +62,7 @@ for project in projects:
                             continue
                         out_folder = os.path.join(output_base, "ui", prompt_type, "noimg", str(iteration + 1))
                         os.makedirs(out_folder, exist_ok=True)
-                        executor.submit(run_generation, ui_name, html_data, llama_prompt, out_folder)
+                        executor.submit(generate_test, ui_name, html_data, llama_prompt, out_folder)
             html_files = [f for f in os.listdir(input_structures) if f.endswith("_html.json") and not f.startswith("UI")]
             for html_file in html_files:
                 process_name = html_file.replace("_html.json", "")
@@ -74,5 +75,6 @@ for project in projects:
                         continue
                     out_folder = os.path.join(output_base, prompt_type, "noimg", str(iteration + 1))
                     os.makedirs(out_folder, exist_ok=True)
-                    executor.submit(run_generation, process_name, html_data, llama_prompt, out_folder)
-print(f"FIN {(time.time() - start_time).total_seconds():.2f} seconds")
+                    executor.submit(generate_test, process_name, html_data, llama_prompt, out_folder)
+print(f"FIN {(time.time() - start_time):.2f} seconds")
+

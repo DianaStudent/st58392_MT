@@ -19,7 +19,7 @@ text_model = "llava:7b"
 code_model = "llama3.1:8b"
 start_time = time.time()
 
-def generate_test_llava_llama(project, process_name, html_data, prompt_template, image_files, output_folder):
+def generate_test(project, process_name, html_data, prompt_template, image_files, output_folder):
     try:
         encoded_screenshots = []
         screenshot_names = []
@@ -104,7 +104,7 @@ for iteration in range(iterations):
                             output_folder = os.path.join(output_base, prompt_type, resolution, str(folder_number))
                             os.makedirs(output_folder, exist_ok=True)
                             executor.submit(
-                                generate_test_llava_llama,
+                                generate_test,
                                 project, ui_process_name, html_data,
                                 {"llava": llava_prompt, "llama": llama_prompt},
                                 image_files, output_folder
@@ -143,10 +143,11 @@ for iteration in range(iterations):
                         output_folder = os.path.join(output_base, prompt_type, resolution, str(folder_number))
                         os.makedirs(output_folder, exist_ok=True)
                         executor.submit(
-                            generate_test_llava_llama,
+                            generate_test,
                             project, process_name, html_data,
                             {"llava": llava_prompt, "llama": llama_prompt},
                             image_files, output_folder
                         )
 
-print(f"FIN {(time.time() - start_time).total_seconds():.2f} seconds")
+print(f"FIN {(time.time() - start_time):.2f} seconds")
+
