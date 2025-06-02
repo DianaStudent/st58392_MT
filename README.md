@@ -200,7 +200,7 @@ python getLLaMa3.1.8B.py</pre>
 - **loop/**  
   Implements multi-step test generation with feedback loop.
   - `getGPTLoop.py` — performs iterative generation using GPT-4o and adaptive prompts.
-  - `geminiLoop.py` — performs iterative generation using Gemini-2.0-flash-001 and adaptive prompts.
+  - `getGeminiLoop.py` — performs iterative generation using Gemini-2.0-flash-001 and adaptive prompts.
   - `collectLoopResults.py` — aggregates outputs across feedback iterations.
 
 <pre>cd Scripts/loop
@@ -230,26 +230,113 @@ python runTestsMut.py        # Executes tests under mutation and logs results
 
 ### 4.2 Output File Structure
 
-#### Generated Tests
+All generated outputs are saved under the corresponding project folder inside `Projects/<ProjectName>/GeneratedTests/`.
 
-All test outputs are saved inside the following path:
-Projects/<ProjectName>/GeneratedTests/tests/<Model>/<PromptType>/<PromptComplexity>/<Resolution>/<RunNumber>/
-Examples: - With screenshots:
-Projects/Cezerin/GeneratedTests/tests/gpt4o/zeroshot/simple/1024/2/
-Projects/Cezerin/GeneratedTests/tests/llava7bllama3.1.8b/zeroshot/detailed/672/2/ - Without screenshots (HTML-only):
-Projects/Cezerin/GeneratedTests/tests/gpt4oHTML/ui/medium/5/ - Feedback loop results:
-Projects/Cezerin/GeneratedTests/tests/gpt4o/feedback/3/success/
-Projects/Cezerin/GeneratedTests/tests/gpt4o/feedback/3/loops/
+#### Test Outputs (`tests/`)
 
-Naming logic includes:
+Initial generated test scripts are saved in structured directories based on:
 
-- Model: gpt4o, gpt4oHTML, llava7bllama3.1.8b, etc.
-- Prompt type: zeroshot, feedback, ui
-- Prompt complexity: simple, medium, detailed
-- Resolution: 672, 768, 1024 (if screenshots are used)
-- Run number: 1, 2, 3, ...
+- Model used (`gpt4o`, `gemini`, `llava7bllama3.1.8b`, etc.)
+- Prompt type (`zeroshot`, `feedback`, `ui`)
+- Prompt complexity (`simple`, `medium`, `detailed`)
+- Screenshot resolution (`672`, `768`, `1024`)
+- Run number (`1`, `2`, `3`, ...)
 
-#### Reports
+`Projects/<ProjectName>/GeneratedTests/tests/<Model>/<PromptType>/<Complexity>/<Resolution>/<RunNumber>/`
 
-Test execution and feedback loop reports are stored here:
-code/Documantation/
+Examples:
+`Projects/Cezerin/GeneratedTests/tests/gpt4o/zeroshot/simple/1024/2/test_addtocart.py`
+`Projects/nopCommerce/GeneratedTests/tests/llava7bllama3.1.8b/ui/detailed/768/1/test_filter.py`
+`Projects/PrestaShop/GeneratedTests/tests/geminiHTML/feedback/medium/3/test_checkout.py`
+_For HTML-only generations, the `<Resolution>` folder is omitted._
+
+#### Test Outputs (`testsURLchange/`)
+
+This folder contains updated versions of initially generated tests (`tests/`) with corrected or normalized URLs.
+
+- Files were copied from `tests/`
+- The script `scripts/manualValidation/URLUpdate.py` automatically fixed incorrect or inconsistent URLs inside test scripts.
+
+<pre>
+cd scripts/manualValidation
+python URLUpdate.py
+</pre>
+
+---
+
+#### Test Outputs (`testsDriverChange/`)
+
+This folder contains updated versions of tests with corrected or improved WebDriver interaction logic.
+
+- Files were copied from `testsURLchange/`.
+- The script `scripts/manualValidation/driverUpdate.py` was used to fix known issues with driver configuration.
+
+<pre>
+cd scripts/manualValidation
+python driverUpdate.py
+</pre>
+
+---
+
+#### Test Outputs (`failed/`)
+
+After running tests from `testsDriverChange/`, failed tests were fixed:
+
+- The script `scripts/manualValidation/copyFailed.py` copied only failing tests from `testsURLchange/` into `failed/`.
+- `fixClick.py` applied automatic fixes to wrong `.click()` elements and replaced `presence_of_element_located` ↔ `element_to_be_clickable` depending on defined rules.
+
+<pre>
+python copyFailed.py
+python fixClick.py
+</pre>
+
+#### Example: Full Recovery Flow
+
+A typical post-validation flow for one project (e.g., `shopizer`) looks like:
+
+<pre>
+cd scripts/manualValidation
+
+# 1. Fix URLs in validated tests
+python URLUpdate.py
+
+# 2. Fix driver logic
+python driverUpdate.py
+
+# 3. Run all tests in batches
+cd ../testExecution
+python runTestsBatch.py
+
+# 4. Extract failures and patch click errors
+cd ../manualValidation
+python copyFailed.py
+python fixClick.py
+</pre>
+
+This workflow allows semi-automated recovery and repair of partially broken LLM-generated tests after initial generation.
+
+#### Feedback Loop Outputs
+
+Scripts executed via `getGPTLoop.py` or `getGeminiLoop.py` produce structured outputs per iteration:
+
+`Projects/<ProjectName>/GeneratedTests/tests/<Model>/feedback/<RunNumber>/`
+├── loops/ # All looped generations per prompt
+├── success/ # Final successful version (if any)
+Example:
+`Projects/Shopizer/GeneratedTests/tests/gpt4o/feedback/3/success/test_addtocart.py`
+--
+
+#### Reports and Logs
+
+Evaluation summaries, logs and feedback/mutation results are saved under:
+`Visualizations/`
+Key files:
+
+- `all_fulldump_fin.csv` — full execution dump
+- `mutation_report_FIN.csv` — generated by `runTestsMut.py`
+- `feedback_report_all_FIN.csv` — feedback loop statistics
+- `resultsFIN.ipynb` — plotting and evaluation notebook
+
+---
+
+All generated tests are saved as standalone `.py` scripts and are executable via `runTestsBatch.py`
