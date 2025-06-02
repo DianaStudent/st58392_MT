@@ -222,8 +222,8 @@ python runTestsBatch.py</pre>
 
 <pre>
 cd Scripts/mutation
-python collectSuccess.py     # Collects successful original tests
-python runTestsMut.py        # Executes tests under mutation and logs results
+python collectSuccess.py    
+python runTestsMut.py       
 </pre>
 
 ### 4.2 Output File Structure
@@ -296,18 +296,10 @@ A typical post-validation flow for one project (e.g., `shopizer`) looks like:
 
 <pre>
 cd scripts/manualValidation
-
-# 1. Fix URLs in validated tests
 python URLUpdate.py
-
-# 2. Fix driver logic
 python driverUpdate.py
-
-# 3. Run all tests in batches
 cd ../testExecution
 python runTestsBatch.py
-
-# 4. Extract failures and patch click errors
 cd ../manualValidation
 python copyFailed.py
 python fixClick.py
