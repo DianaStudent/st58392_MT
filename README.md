@@ -89,14 +89,10 @@ Scripts are specific to each project, but follow the same naming and structure.
 Run Web App via Docker or CMD
 To collect data for a specific process:
 
-<pre> cd Projects/&lt;ProjectName&gt;/Data/getData 
-python getData&lt;ProcessName&gt;.py </pre>
-
-Run Web App via Docker or CMD
-To collect data for a specific process:
-
-<pre> cd Projects/&lt;ProjectName&gt;/Data/getData </pre>
-<pre>python getData&lt;ProcessName&gt;.py </pre>
+<pre> 
+cd Projects/&lt;ProjectName&gt;/Data/getData 
+python getData&lt;ProcessName&gt;.py
+</pre>
 
 ## 2. Data Preprocessing
 
