@@ -100,15 +100,16 @@ For each project, a dedicated script is used to clean and compress the raw HTML 
 
 - Scripts are located at:
   `Scripts/compress_html/`
-  Examples:
 
-  - `compressHTMLceserin.py`
-  - `compressHTMLnopcommerce.py`
-  - `compressHTMLprestashop.py`
-  - `compressHTMLshopizer.py`
+Examples:
 
-  - Output cleaned HTML files are saved as JSON:
-    `Projects/<ProjectName>/Data/cleanData/<process>\_html.json`
+- `compressHTMLceserin.py`
+- `compressHTMLnopcommerce.py`
+- `compressHTMLprestashop.py`
+- `compressHTMLshopizer.py`
+
+- Output cleaned HTML files are saved as JSON:
+  `Projects/<ProjectName>/Data/cleanData/<process>\_html.json`
 
 ### 2.2 Screenshot Resolution Generation
 
@@ -122,7 +123,7 @@ To create resolution-specific versions of screenshots (for simulating different 
 - Output folder structure:
   `Projects/<ProjectName>/Data/screenshots/resolution/<resolution>/<process>\_screen`
   Example:
-  `code/Projects/Cezerin/Data/screenshots/resolution/672/addtocart_screen/addtocart_screen1.png`
+  `Projects/Cezerin/Data/screenshots/resolution/672/addtocart_screen/addtocart_screen1.png`
 
 ### 2.3 How to Run
 
@@ -138,31 +139,29 @@ python resolutionCh.py</pre>
 
 ## 3. Prompt Management
 
-Prompts are manually created and stored per model, project, and task type. Each prompt is tied to a specific user process (e.g., Add to Cart, Checkout) and level of detail.
+Prompts are manually created and stored per model, project and task type. Each prompt is tied to a specific user process and level of detail.
 
 ### 3.1 Prompt Folders
 
 Prompts are stored under:
-Projects/<ProjectName>/Data/prompts/<ModelName>/<PromptType>/
+`Projects/<ProjectName>/Data/prompts/<ModelName>/<PromptType>/`
 
 #### Prompt types:
 
-- zeroshot/ — manually written base prompts
+- zeroshot/ — written prompts with 3 deatail level - simple, medium and detailed
 - feedback/ — initial prompts + updated versions for feedback loop
 
 Example (GPT-4o, Cezerin):
-code/Projects/Cezerin/Data/prompts/gpt4o/zeroshot/
-code/Projects/Cezerin/Data/prompts/gpt4o/feedback/
+`Projects/Cezerin/Data/prompts/gpt4o/zeroshot/`
+`Projects/Cezerin/Data/prompts/gpt4o/feedback/`
 
 Each file follows the naming pattern:
-<process>\_<complexity>\_prompt.txt
-e.g.: - addtocart_detailed_prompt.txt - checkout_loop_prompt.txt - filter_initial_prompt.txt
+`<process>_<complexity>_prompt.txt`
+e.g.:
 
-### 3.2 LLaVA-Compatible Prompts
-
-To convert existing GPT-4o prompts to be compatible with LLaVA (different image processing format), two scripts are used:
-Scripts/prompts/prepLlamaPrompts.py
-Scripts/prompts/prepLlamaPromtsHTML.py - These scripts take existing GPT-4o prompts and modify them to fit LLaVA’s expected input format. - One script is for screenshot-based prompts, the other — for HTML-only cases.
+- `addtocart_detailed_prompt.txt`
+- `checkout_loop_prompt.txt`
+- `filter_initial_prompt.txt`
 
 ## 4. Script Execution and Test Generation
 
@@ -232,11 +231,11 @@ Scripts/<Category>/
 All test outputs are saved inside the following path:
 Projects/<ProjectName>/GeneratedTests/tests/<Model>/<PromptType>/<PromptComplexity>/<Resolution>/<RunNumber>/
 Examples: - With screenshots:
-code/Projects/Cezerin/GeneratedTests/tests/gpt4o/zeroshot/simple/1024/2/
-code/Projects/Cezerin/GeneratedTests/tests/llava7bllama3.1.8b/zeroshot/detailed/672/2/ - Without screenshots (HTML-only):
-code/Projects/Cezerin/GeneratedTests/tests/gpt4oHTML/ui/medium/5/ - Feedback loop results:
-code/Projects/Cezerin/GeneratedTests/tests/gpt4o/feedback/3/success/
-code/Projects/Cezerin/GeneratedTests/tests/gpt4o/feedback/3/loops/
+Projects/Cezerin/GeneratedTests/tests/gpt4o/zeroshot/simple/1024/2/
+Projects/Cezerin/GeneratedTests/tests/llava7bllama3.1.8b/zeroshot/detailed/672/2/ - Without screenshots (HTML-only):
+Projects/Cezerin/GeneratedTests/tests/gpt4oHTML/ui/medium/5/ - Feedback loop results:
+Projects/Cezerin/GeneratedTests/tests/gpt4o/feedback/3/success/
+Projects/Cezerin/GeneratedTests/tests/gpt4o/feedback/3/loops/
 
 Naming logic includes:
 
