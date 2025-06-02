@@ -79,7 +79,9 @@ def generate_test(process_name, html_data, prompt_init_template, prompt_retry_te
     print(f"FAIL: {max_attempts} attempts.")
     return False
 
-def main():
+for i in range(5):
+    print(f"ITERATION: {i + 1}")
+    start = time.time()
     existing = [d for d in os.listdir(base_output_root) if d.isdigit()]
     existing_numbers = sorted([int(d) for d in existing])
     next_number = (existing_numbers[-1] + 1) if existing_numbers else 1
@@ -111,9 +113,5 @@ def main():
             if f.lower().endswith(".png")
         ])
         generate_test(process_name, html_data, prompt_init_template, prompt_retry_template, image_files, output_run, output_success, max_attempts=10)
-if __name__ == "__main__":
-    for i in range(5):
-        print(f"ITERATION: {i + 1}")
-        start = time.time()
-        main()
-        print(f"FIN {time.time() - start:.2f} seconds")
+
+print(f"FIN {time.time() - start:.2f} seconds")
