@@ -14,7 +14,7 @@ base_dir = Path(r"C:\Diana\MasterCode\code\Projects")
 collected_dir = base_dir / project / "Processes" / "collectedSuccessGEMINI"
 results_dir = Path(r"C:\Diana\MasterCode\code\Documantation")
 results_dir.mkdir(parents=True, exist_ok=True)
-csv_file = results_dir / f"tests_report_Mutation.csv"
+csv_file = results_dir / f"mutation_report_FIN.csv"
 timestamp = time.strftime("%Y%m%d_%H%M%S")
 
 pre_mutation = False

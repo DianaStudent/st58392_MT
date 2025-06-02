@@ -1,7 +1,7 @@
 import shutil
 import csv
 from pathlib import Path
-csv_path = Path(r"C:\diana\MasterCode\code\Documantation\reports\manualcheck\updatedTestsResults\URLold\shopizerTest.csv")
+csv_path = Path(r"C:\diana\MasterCode\code\Documantation\reports\results_all.csv")
 base_dir = Path(r"C:\diana\MasterCode\code\Projects")
 #projects = ["Cezerin", "shopizer", "prestashop", "nopCommerce", "medusa"]
 projects = ["shopizer"] 

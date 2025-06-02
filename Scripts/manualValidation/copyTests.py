@@ -1,7 +1,7 @@
 import shutil
 from pathlib import Path
 import csv
-csv_path = Path(r"C:\Diana\Master\MasterCode\code\Documantation\reports\manualcheck\manualSelectURLallcsv.csv")
+csv_path = Path(r"C:\Diana\Master\MasterCode\code\Visualizations\ManualValidation\manualSelectURLallcsv.csv")
 base_dir = Path(r"C:\Diana\Master\MasterCode\code\Projects")
 dest_folder = Path(r"C:\Diana\Master\MasterCode\code\Documantation\reports\manualcheck\testsURLall_names")
 copied = 0

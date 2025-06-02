@@ -6,7 +6,7 @@ projects = ["Cezerin", "shopizer", "prestashop", "nopCommerce", "medusa"]
 # model = "gpt-4o" 
 model = "gemini"
 results_dir = r"C:\Diana\MasterCode\code\Documantation"
-csv_output = os.path.join(results_dir, f"feedback_report_all_gemini.csv")
+csv_output = os.path.join(results_dir, f"feedback_report_all_FIN.csv")
 def extract_cycle_number(filename):
     match = re.search(r'_v(\d+)\.py$', filename)
     return int(match.group(1)) if match else -1

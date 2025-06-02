@@ -2,7 +2,7 @@ import csv
 import subprocess
 from pathlib import Path
 
-csv_path = Path(r"C:\diana\MasterCode\code\Documantation\reports\manualcheck\updatedTestsResults\URL\medusaTestGeminiFix.csv")
+csv_path = Path(r"C:\diana\MasterCode\code\Documantation\reports\manualcheck\updatedTestsResults\URL\all_fin.csv")
 #csv_path = Path(r"C:\diana\MasterCode\code\Documantation\reports\manualcheck\updatedTestsResults\URL\CezerinTestDriver.csv")
 base_dir = Path(r"C:\diana\MasterCode\code\projects")
 #projects = ["Cezerin", "shopizer", "prestashop", "nopCommerce", "medusa"]

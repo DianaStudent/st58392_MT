@@ -16,8 +16,8 @@ base_dir = Path(r"C:\diana\MasterCode\code\projects")
 #projects = ["Cezerin", "shopizer", "prestashop", "nopCommerce", "medusa"]
 projects = ["medusa"]
 sources = [("tests", "tests"), ("testsURLchange", "testsURLchange"), ("testsDriverChange", "testsDriverChange"), ("failed", "failed")]
-output_csv = Path(r"C:\diana\MasterCode\code\Documantation\reports\manualcheck\updatedTestsResults\URL\medusaTestGeminiFix.csv")
-alt_csv = Path(r"C:\diana\MasterCode\code\Documantation\reports\manualcheck\updatedTestsResults\URL\medusaTestGeminiFix_fulldump.csv")
+output_csv = Path(r"C:\diana\MasterCode\code\Documantation\reports\manualcheck\updatedTestsResults\URL\all_fin.csv")
+alt_csv = Path(r"C:\diana\MasterCode\code\Documantation\reports\manualcheck\updatedTestsResults\URL\all_fulldump_fin.csv")
 timestamp = time.strftime("%Y%m%d_%H%M%S")
 _original_chrome = webdriver.Chrome
 def headless_chrome(*args, **kwargs):
