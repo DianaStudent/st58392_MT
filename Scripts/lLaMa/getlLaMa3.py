@@ -14,20 +14,15 @@ base_path = r"C:\Diana\MasterCode\Code\Projects"
 model_name = "llava-llama3:latest"
 llava_url = "http://localhost:11434/api/generate"
 
-def load_prompt_template(path):
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
-def encode_images(image_paths):
-    encoded = []
-    names = []
-    for img_path in image_paths:
-        with open(img_path, "rb") as f:
-            encoded.append(base64.b64encode(f.read()).decode("utf-8"))
-            names.append(os.path.basename(img_path))
-    return encoded, names
 def generate_test(process_name, html_data, prompt_llava, prompt_llama, image_files, output_folder):
     try:
-        encoded_images, image_names = encode_images(image_files)
+        encoded_images = []
+        image_names = []
+        for img_path in image_files:
+            with open(img_path, "rb") as f:
+                encoded = base64.b64encode(f.read()).decode("utf-8")
+                encoded_images.append(encoded)
+                image_names.append(os.path.basename(img_path))
         prompt_screens = prompt_llava.format(process_name=process_name, screenshot_names=", ".join(image_names))
 
         response1 = requests.post(llava_url, json={
@@ -77,8 +72,14 @@ for project in projects:
                     html_data = {"html": html_raw}
                     for prompt_type in prompt_types:
                         try:
-                            llava_prompt = load_prompt_template(os.path.join(prompts_base, f"ui_{prompt_type}_llava_prompt.txt"))
-                            llama_prompt = load_prompt_template(os.path.join(prompts_base, f"ui_{prompt_type}_llama_prompt.txt"))
+                            lava_path = os.path.join(prompts_base, f"ui_{prompt_type}_llava_prompt.txt")
+                            llama_path = os.path.join(prompts_base, f"ui_{prompt_type}_llama_prompt.txt")
+                            if not os.path.isfile(llava_path) or not os.path.isfile(llama_path):
+                                continue
+                            with open(llava_path, "r", encoding="utf-8") as f:
+                                llava_prompt = f.read()
+                            with open(llama_path, "r", encoding="utf-8") as f:
+                                llama_prompt = f.read()
                         except Exception as e:
                             continue
                         for res in resolutions:
@@ -105,8 +106,14 @@ for project in projects:
                     html_data = json.load(f)
                 for prompt_type in prompt_types:
                     try:
-                        llava_prompt = load_prompt_template(os.path.join(prompts_base, f"{process_name}_{prompt_type}_llava_prompt.txt"))
-                        llama_prompt = load_prompt_template(os.path.join(prompts_base, f"{process_name}_{prompt_type}_llama_prompt.txt"))
+                        llava_path = os.path.join(prompts_base, f"{process_name}_{prompt_type}_llava_prompt.txt")
+                        llama_path = os.path.join(prompts_base, f"{process_name}_{prompt_type}_llama_prompt.txt")
+                        if not os.path.isfile(llava_path) or not os.path.isfile(llama_path):
+                            continue
+                        with open(llava_path, "r", encoding="utf-8") as f:
+                            llava_prompt = f.read()
+                        with open(llama_path, "r", encoding="utf-8") as f:
+                            llama_prompt = f.read()
                     except Exception:
                         continue
                     for res in resolutions:

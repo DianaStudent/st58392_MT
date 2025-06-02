@@ -12,11 +12,6 @@ base_path = r"C:\Diana\MasterCode\Code\Projects"
 model_name = "llava-llama3:latest"
 llava_url = "http://localhost:11434/api/generate"
 
-def load_prompt(path):
-    if not os.path.isfile(path):
-        raise FileNotFoundError(f"⚠️ Prompt not found: {path}")
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
 def generate_test(process_name, html_data, llama_prompt, output_folder):
     try:
         prompt = llama_prompt.format(
@@ -57,7 +52,11 @@ for project in projects:
                     html_data = {"html": html_raw}
                     for prompt_type in prompt_types:
                         try:
-                            llama_prompt = load_prompt(os.path.join(prompts_base, f"ui_{prompt_type}_llama_prompt.txt"))
+                            prompt_file = os.path.join(prompts_base, f"ui_{prompt_type}_llama_prompt.txt")
+                            if not os.path.isfile(prompt_file):
+                                continue
+                            with open(prompt_file, "r", encoding="utf-8") as f:
+                                llama_prompt = f.read()
                         except Exception:
                             continue
                         out_folder = os.path.join(output_base, "ui", prompt_type, "noimg", str(iteration + 1))
@@ -70,7 +69,11 @@ for project in projects:
                     html_data = json.load(f)
                 for prompt_type in prompt_types:
                     try:
-                        llama_prompt = load_prompt(os.path.join(prompts_base, f"{process_name}_{prompt_type}_llama_prompt.txt"))
+                        prompt_file = os.path.join(prompts_base, f"{process_name}_{prompt_type}_llama_prompt.txt")
+                        if not os.path.isfile(prompt_file):
+                            continue
+                        with open(prompt_file, "r", encoding="utf-8") as f:
+                            llama_prompt = f.read()
                     except Exception:
                         continue
                     out_folder = os.path.join(output_base, prompt_type, "noimg", str(iteration + 1))
